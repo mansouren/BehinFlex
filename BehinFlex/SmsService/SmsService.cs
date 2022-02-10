@@ -28,7 +28,7 @@ namespace BehinFlex.SmsService
             int smsType = input.SmsType == SmsType.Standard ? 1 : 0;
             //985000299557479
             //irandrip9400030
-            var msgIds = smsService.SendMessage("flex9400030", "4022308", "985000299557479", input.Body, numberArray, smsType, usermessageid);
+            var msgIds = smsService.SendMessage("", "", "", input.Body, numberArray, smsType, usermessageid);
             long result = msgIds[0];
             if (result >= 1000 || result == 2)
             {
@@ -71,7 +71,7 @@ namespace BehinFlex.SmsService
         public int GetCredit()
         {
             TrezSmsService smsService = new TrezSmsService();
-            long credit=smsService.GetCredit("flex9400030", "4022308", "985000299557479");
+            long credit=smsService.GetCredit("", "", "");
             if (credit == -1)
             {
                 return 0;
