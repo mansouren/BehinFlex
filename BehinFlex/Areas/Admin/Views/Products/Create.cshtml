@@ -1,0 +1,192 @@
+﻿@using BehinFlex.Models
+@model BehinFlex.Models.Products
+
+@{
+    ViewBag.Title = "افزودن " + Server.HtmlDecode(Html.DisplayNameFor(model => model).ToString());
+}
+
+<h2>افزودن @Html.DisplayNameFor(model => model)</h2>
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductSubGroup.ProductGroup.ProductBrandID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ProductBrandID", (SelectList)ViewBag.ProductBrandID, "-- انتخاب ---", htmlAttributes: new { @class = "form-control", @id = "rdbBrand", @onchange = "secim1()" })
+            @Html.ValidationMessageFor(model => model.ProductSubGroup.ProductGroup.ProductBrandID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductSubGroup.ProductGroupID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ProductGroupID", (SelectList)ViewBag.ProductGroupID, "-- انتخاب ---", htmlAttributes: new { @class = "form-control", @id = "rdbGroup", @onchange = "secim()" })
+            @Html.ValidationMessageFor(model => model.ProductSubGroup.ProductGroupID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductSubGroupID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ProductSubGroupID", (SelectList)ViewBag.ProductSubGroupID, "-- انتخاب ---", htmlAttributes: new { @class = "form-control", @id = "rdbSubGroup" })
+            @Html.ValidationMessageFor(model => model.ProductSubGroupID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProductTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProductTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductEnTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProductEnTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProductEnTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProductDetails, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProductDetails, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProductDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.Kendo().Upload().Name("ProductImageUrl").Multiple(false)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+
+        </div>
+        
+        <div class="col-md-10">
+           
+            @Html.LabelFor(model => model.IsSpecial)&nbsp;
+            @Html.EditorFor(model => model.IsSpecial)
+            @Html.ValidationMessageFor(model => model.IsSpecial)
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="ProductGallery">گالری تصاویر</label>
+        <div class="col-md-10">
+            @Html.Kendo().Upload().Name("ProductGallery").Multiple(true)
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProductPrice, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProductPrice, "", new { @class = "text-danger" })
+            <br />
+            <p class="help-block">قیمتها به ریال هستند</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">درصد تخفیف :</label>
+        
+        <div class="col-md-10">
+            
+            <input  type="number" min="0"  name="Discount" class="form-control"/>
+   
+           
+        </div>
+    </div>
+
+    @section Script {
+
+        <script src="~/ckeditor/ckeditor.js"></script>
+        <script src="~/ckeditor/adapters/jquery.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#ProductDescription').ckeditor();
+
+            });
+
+            function secim1() {
+                var brandId = $('#rdbBrand').val();
+                $.ajax({
+                    url: '/Admin/Products/BrandGroupDrop?id=' + brandId,
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { ProductBrand: brandId },
+                    success: function (bolumler) {
+                        $("#rdbGroup").html("").append($('<option>انتخاب کنید</option>'));;
+                        $.each(bolumler, function (i, group) {
+                            $("#rdbGroup").append(
+                                $('<option></option>').val(group.ProductGroupID).html(group.ProductGroupTitle));
+                        });
+                    }
+                });
+            }
+
+            function secim() {
+                var groupId = $('#rdbGroup').val();
+                $.ajax({
+                    url: '/Admin/Products/GroupSubGroupDrop?id=' + groupId,
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { ProductGroup: groupId },
+                    success: function (bolumler) {
+                        $("#rdbSubGroup").html("").append($('<option>انتخاب کنید</option>'));;
+                        $.each(bolumler, function (i, subgroup) {
+                            $("#rdbSubGroup").append(
+                                $('<option></option>').val(subgroup.ProductSubGroupID).html(subgroup.ProductSubGroupTitle));
+                        });
+                    }
+                });
+            }
+        </script>
+
+    }
+
+    <div class="form-group" id="buttons">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="ایجاد" class="btn btn-primary" />
+            @Html.ActionLink("بازگشت به فهرست", "Index")
+        </div>
+    </div>
+</div>
+
+    
+}
+
+

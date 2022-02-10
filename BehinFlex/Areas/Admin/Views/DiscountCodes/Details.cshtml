@@ -1,0 +1,67 @@
+﻿@model BehinFlex.Models.DiscountCodes
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DiscountCodes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountCodeTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountCodeTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountCodeExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountCodeExpireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountPercent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountPercent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountMaxAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountMaxAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountCodeUsageCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountCodeUsageCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DiscountCodeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

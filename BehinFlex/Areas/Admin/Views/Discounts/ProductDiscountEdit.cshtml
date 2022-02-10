@@ -1,0 +1,145 @@
+﻿@model BehinFlex.Models.Discounts
+
+@{
+    ViewBag.Title = "ویرایش " + Server.HtmlDecode(Html.DisplayNameFor(model => model).ToString());
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>ویرایش @Html.DisplayNameFor(model => model)</h2>
+
+@using (Html.BeginForm("ProductDiscountEdit","Discounts",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.DiscountID)
+
+     
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Products.ProductSubGroup.ProductGroup.ProductBrandID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductBrandID", null, htmlAttributes: new { @class = "form-control", @id = "rdbBrand", @onchange = "secim1()" })
+                @Html.ValidationMessageFor(model => model.Products.ProductSubGroup.ProductGroup.ProductBrandID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Products.ProductSubGroup.ProductGroupID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductGroupID", null, htmlAttributes: new { @class = "form-control", @id = "rdbGroup", @onchange = "secim2()" })
+                @Html.ValidationMessageFor(model => model.Products.ProductSubGroup.ProductGroupID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Products.ProductSubGroupID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductSubGroupID", null , htmlAttributes: new { @class = "form-control", @id = "rdbSubGroup", @onchange = "secim3()" })
+                @Html.ValidationMessageFor(model => model.Products.ProductSubGroupID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductID, "عنوان محصول", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductID", null, htmlAttributes: new { @class = "form-control", @id = "rdbProduct" })
+                @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.DiscountPercent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DiscountPercent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DiscountPercent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+        <div class="form-group" id="buttons">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ثبت" class="btn btn-primary" />
+                @Html.ActionLink("بازگشت به فهرست", "ProductDiscountIndex")
+            </div>
+        </div>
+
+        @section Script {
+        
+            <script src="~/scripts/jquery.validate.min.js"></script>
+            <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+            
+            <script  type="text/javascript">
+        
+                function secim1() {
+                    var brandId = $('#rdbBrand').val();
+                    $.ajax({
+                        url: '/Admin/Discounts/BrandGroupDrop?id=' + brandId,
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { ProductBrand: brandId },
+                        success: function(bolumler) {
+                            $("#rdbGroup").html("").append($('<option>انتخاب کنید</option>'));
+                            $.each(bolumler,
+                                function(i, group) {
+                                    $("#rdbGroup").append(
+                                        $('<option></option>').val(group.ProductGroupID).html(group.ProductGroupTitle));
+                                    
+                                });
+                        }
+                    });
+                };
+
+                function secim2() {
+                    var groupId = $('#rdbGroup').val();
+                    $.ajax({
+                        url: '/Admin/Discounts/GroupSubGroupDrop?id=' + groupId,
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { ProductGroup: groupId },
+                        success: function(bolumler) {
+                            $("#rdbSubGroup").html("").append($('<option>انتخاب کنید</option>'));
+                            $.each(bolumler,
+                                function(i, subgroup) {
+                                    $("#rdbSubGroup").append(
+                                        $('<option></option>').val(subgroup.ProductSubGroupID)
+                                        .html(subgroup.ProductSubGroupTitle));
+                                    
+                                });
+                        }
+                    });
+                };
+
+                function secim3() {
+                    var subgroupId = $('#rdbSubGroup').val();
+                    $.ajax({
+                        url: '/Admin/Discounts/SubGroupDrop?id=' + subgroupId,
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { ProductSubGroup: subgroupId },
+                        success: function (bolumler) {
+                            $("#rdbProduct").html("").append($('<option>انتخاب کنید</option>'));
+                            $.each(bolumler,
+                                function (i, product) {
+                                    $("#rdbProduct").append(
+                                        $('<option></option>').val(product.ProductID).html(product.ProductTitle));
+                                    
+                                });
+                        }
+                    });
+                };
+      
+
+            </script>
+   
+  
+        }
+
+      
+    </div>
+}

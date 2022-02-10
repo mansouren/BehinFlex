@@ -1,0 +1,74 @@
+﻿@model BehinFlex.Models.ProductSubGroup
+
+@{
+    ViewBag.Title = "ویرایش " + Server.HtmlDecode(Html.DisplayNameFor(model => model).ToString());
+    Layout = "~/areas/admin/views/shared/_layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductSubGroupID)
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductGroup.ProductBrandID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductBrandID",null, htmlAttributes: new { @class = "form-control",@id="rdbBrand", @onchange = "secim()" })
+                @Html.ValidationMessageFor(model => model.ProductGroupID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductGroupID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductGroupID", null, htmlAttributes: new { @class = "form-control" , @id = "rdbGroup" })
+                @Html.ValidationMessageFor(model => model.ProductGroupID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductSubGroupTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductSubGroupTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductSubGroupTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="buttons">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ثبت" class="btn btn-primary" />
+                @Html.ActionLink("بازگشت به فهرست", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+@section Script
+{
+    <script type="text/javascript">
+        function secim() {
+            var brandId = $('#rdbBrand').val();
+            //alert(fakulteId);
+            $.ajax({
+                url: '/Admin/ProductSubGroups/BrandGroupDrop?id=' + brandId,
+                type: "POST",
+                dataType: "JSON",
+                data: { ProductBrand: brandId },
+                success: function (bolumler) {
+                    $("#rdbGroup").html("").append($('<option>انتخاب کنید</option>'));
+                    $.each(bolumler, function (i, group) {
+                        $("#rdbGroup").append(
+                            $('<option></option>').val(group.ProductGroupID).html(group.ProductGroupTitle));
+                    });
+                }
+            });
+        }
+    </script>
+}

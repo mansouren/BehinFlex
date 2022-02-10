@@ -1,0 +1,165 @@
+﻿
+
+
+<div id="content">
+    <div class="container" id="about" dir="rtl">
+        <div class="row">
+            <!-- sidebar -->
+            <div class="col-md-3  sidebar visible-md-block visible-lg-block">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="/ShoppingCart/Index">
+                            مشاهده پیش فاکتور
+                            <small>آنلاین خرید کنید </small>
+                        </a>
+                    </li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="/Home/GetReferalCode">
+                                باشگاه مشتریان
+                                <small>به دوستان ما بپیوندید</small>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Account/Register">
+                                باشگاه مشتریان
+                                <small>به دوستان ما بپیوندید</small>
+                            </a>
+                        }
+
+                    </li>
+                    <li class="active">
+                        <a href="/Home/MapRequest" class="first">
+                            درخواست نقشه کشی
+                            <small>نقشه تاسیسات خود را به ما بسپارید</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/Transport">
+                            نحوه ارسال کالا
+                            <small></small>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--main content-->
+            <div class="col-md-9 " dir="rtl">
+                <div class="page-header">
+                    <h2 style="font-family:'Times New Roman'">
+                        درخواست نقشه کشی
+                        <small>ثبت درخواست نقشه کشی تاسیسات</small>
+                    </h2>
+                </div>
+
+                <br />
+                <br />
+
+
+                <div id="contact" class="mission block block-pd-sm block-bg-noise" dir="rtl">
+                    @using (Html.BeginForm("MapRequest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @model BehinFlex.Models.ViewModels.MapViewModel
+                        @Html.AntiForgeryToken()
+                        <div class="form">
+                            @if (ViewBag.Message == null)
+                            {
+                    
+                                @Html.ValidationSummary(true, "", new { @class = "text-muted" })
+                                <div class="form-group">
+                                    <div class="col-sm-3 hidden-xs">
+                                        <label for="name">نام و نام خانوادگی :</label>
+                                    </div>
+                                    <div class="col-sm-9 form-group">
+                                        
+                                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-muted" })
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3 hidden-xs">
+                                        <label for="name">آدرس ایمیل :</label>
+                                    </div>
+
+                                    <div class="col-sm-9 form-group">
+                                        
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-muted" })
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3 hidden-xs">
+                                        <label for="name">شماره موبایل :</label>
+                                    </div>
+
+                                    <div class="col-sm-9 form-group">
+                                        
+                                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-muted" })
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-3 hidden-xs">
+                                        <label for="name">نقشه مورد نظر :</label>
+                                    </div>
+                                    <div class="col-sm-9 form-group">
+                                        @foreach (var item in Model.AvailableMapType)
+                                        {
+                                            <div class="checkbox" style="display:inline-block">
+                                                <label>
+                                                    @item.Text
+                                                </label>&nbsp;
+                                                <input type="checkbox"
+                                                       name="SelectedMapType"
+                                                       value="@item.Value"
+                                                       @if (Model.SelectedMapType.Contains(item.Value)) { <text> checked </text> } />
+                                            </div>
+
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-3 hidden-xs">
+                                        <label for="name">توضیحات :</label>
+                                    </div>
+                                    <div class="col-sm-9 form-group">
+                                
+                                        @Html.EditorFor(model => model.message, new { htmlAttributes = new { @class = "form-control", rows = "7" } })
+                                        @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-muted" })
+                                    </div>
+
+                                </div>
+                                <div class="text-center col-sm-12"><button type="submit">ارسال پیام</button></div>
+                                @*</form>*@
+                            }
+                        </div>
+                        <div>
+                            <div>
+                                @if (ViewBag.Message != null)
+                                {
+                                    <div id="sendmessage" class="alert alert-info text-center">@ViewBag.Message</div>
+
+
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                        <br />
+                        <br />
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+

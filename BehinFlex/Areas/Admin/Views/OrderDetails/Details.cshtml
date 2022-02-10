@@ -1,0 +1,109 @@
+﻿@model IEnumerable < BehinFlex.Models.OrderDetails>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+
+            <div class="col-md-10">
+                <div>
+                    <div>
+                        <h2>جزئیات پیش فاکتور </h2>
+
+                        <hr />
+                    </div>
+                    <div>
+
+
+
+                        <div class="row " style="overflow-x:auto;">
+                           
+                            <table class="table table-bordered table-hover table-striped col-md-11 text-center ">
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>تصویر</th>
+                                    <th>نام کالا و مشخصات فنی</th>
+                                    <th>سایز</th>
+                                    <th>قیمت</th>
+                                    <th>تعداد</th>
+                                    <th>تخفیف</th>
+                                    <th>جمع (ریال)</th>
+                                    <th>جمع با تخفیف (ریال)</th>
+
+
+
+                                </tr>
+                                @{
+                                    int RowCount = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@RowCount</td>
+                                        <td><img src="/img/logo.png" width="100" /></td>
+                                        <td>
+                                            @*<a href="/Product/ShowProduct/@item.ProductId" target="_blank">*@
+                                                <span style="font-weight: bold">@item.Products.ProductTitle</span>
+                                                <p>@item.Products.ProductDetails</p>
+                                            @*</a>*@
+                                        </td>
+                                        <td>@item.Products.Size</td>
+                                        <td>@item.ProductPrice</td>
+                                        <td>@item.ProductCount</td>
+
+
+                                        @if (item.Products.Discounts.Any(d => d.ProductID == item.ProductId))
+                                        {
+                                            <td>@item.Products.Discounts.FirstOrDefault(d => d.ProductID == item.ProductId).DiscountPercent %</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+
+                                        <td>@item.Sum</td>
+                                        <td>@item.SumWithDiscount</td>
+
+                                    </tr>
+                                    RowCount++;
+                                }
+
+                                @*<tr>
+
+                                    <td colspan="7" class="text-left">جمع کل (ریال) : </td>
+                                    <td>
+                                        @Model.Sum(s => s.ProductPrice * s.ProductCount)
+                                    </td>
+                                    <td>
+                                        @Model.Sum(s => s.SumWithDiscount)
+                                    </td>
+
+                                </tr>*@
+       
+
+                            </table>
+                  
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <p>
+    
+        @Html.ActionLink("بازگشت به سفارشات", "Index","Orders")
+    </p>
+</div>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BehinFlex.Models.Comments>
+
+
+@{
+    ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              
+              columns.Bound(model => model.Products.ProductTitle);
+              columns.Bound(model => model.Users.UserName);
+              columns.Bound(model => model.IsApproved);
+              columns.Bound(model => model.CommentDate);
+              columns.Bound(item => @item.CommentID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                @Html.ActionLink("جزئیات", "Details", new { id = @item.CommentID }, new { @class = "k-button k-button-icontext k-grid-Details" })
+                                @Html.ActionLink("ویرایش", "Edit", new {id = @item.CommentID}, new {@class = "k-button k-button-icontext k-grid-Edit"})
+                                @Html.ActionLink("حذف", "Delete", new {id = @item.CommentID}, new {@class = "k-button k-button-icontext k-grid-Delete"})
+                             </text>).Width(300);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Custom().Action("Create", "Comments").Text("افزودن");
+          }
+          )
+          .Groupable()
+          .Pageable()
+          .Sortable()
+          .Scrollable(scrollable => scrollable.Height("auto"))
+          .Filterable()
+          .DataSource(dataSource => dataSource
+              .Server()
+
+              .Model(model => model.Id(item => item.CommentID))
+              .PageSize(10)
+          )
+    )
+
+</div>

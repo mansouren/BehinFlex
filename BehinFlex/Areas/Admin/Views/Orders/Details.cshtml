@@ -1,0 +1,68 @@
+﻿@model BehinFlex.Models.OrderDetails
+
+@{
+    ViewBag.Title = "جزئیات سفارش";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Orders</h4>
+    <hr />
+    @Html.HiddenFor(model=>model.OrderId)
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Products.ProductImageUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Products.ProductImageUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Products.ProductTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Products.ProductTitle)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ProductCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SumWithDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Orders.OrderTotalSum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Orders.OrderTotalSumWithDiscount)
+        </dd>*@
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Users.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.UserName)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+

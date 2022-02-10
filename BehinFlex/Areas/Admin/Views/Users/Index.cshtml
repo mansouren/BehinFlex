@@ -1,0 +1,92 @@
+﻿@model IEnumerable<BehinFlex.Models.Users>
+
+@{
+    ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+
+
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.FullName);
+              columns.Bound(model => model.Phone);
+              columns.Bound(model => model.Email);
+              columns.Bound(model => model.CreateDate);
+              columns.Bound(model => model.CustomerType.CustomerTypeTitle);
+              columns.Template(model => model.Bonuses.Where(b => b.UserId == model.UserID).Sum(b => b.Bonus)).Title("امتیاز کاربر");
+              columns.Bound(model => model.Roles.RoleTitle);
+              columns.Bound(item => @item.UserID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                @Html.ActionLink("ویرایش", "Edit", new { id = @item.UserID }, new { @class = "k-button k-button-icontext k-grid-Edit" })
+                @Html.ActionLink("حذف", "Delete", new { id = @item.UserID }, new { @class = "k-button k-button-icontext k-grid-Delete" })
+                @*@Html.ActionLink("ارسال پیامک", "SendSmss", new { id = @item.UserID }, new { @class = "k-button k-button-icontext k-grid-SendSms" })*@
+                </text>).Width(270);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Custom().Action("Create", "Users").Text("افزودن");
+              toolbar.Custom()
+                  .Text("گزارش Excel")
+                  .HtmlAttributes(new { id = "export" })
+                  .Url(Url.Action("Export", "Users", new { page = 1, pageSize = "~", filter = "~", sort = "~" }));
+              toolbar.Custom().Action("SendSmss", "Users").Text("ارسال پیامک");
+          }
+          )
+
+          .Groupable()
+          .Pageable()
+          .Sortable()
+          .Scrollable(scrollable => scrollable.Height("auto"))
+          .Filterable()
+          .DataSource(dataSource => dataSource.Server()
+              .Model(model => model.Id(item => item.UserID))
+              .PageSize(10)
+          )
+    )
+
+
+</div>
+@section Script
+{
+    <script type="text/javascript">
+        $(function () {
+            var grid = $('#Grid').data('kendoGrid');
+
+            // ask the parameterMap to create the request object for you
+            var requestObject = (new kendo.data.transports["aspnetmvc-server"]({ prefix: "" }))
+                .options.parameterMap({
+                    page: grid.dataSource.page(),
+                    sort: grid.dataSource.sort(),
+                    filter: grid.dataSource.filter()
+                });
+
+            // Get the export link as jQuery object
+            var $exportLink = $('#export');
+
+            // Get its 'href' attribute - the URL where it would navigate to
+            var href = $exportLink.attr('href');
+
+            // Update the 'page' parameter with the grid's current page
+            href = href.replace(/page=([^&]*)/, 'page=' + requestObject.page || '~');
+
+            // Update the 'sort' parameter with the grid's current sort descriptor
+            href = href.replace(/sort=([^&]*)/, 'sort=' + requestObject.sort || '~');
+
+            // Update the 'pageSize' parameter with the grid's current pageSize
+            href = href.replace(/pageSize=([^&]*)/, 'pageSize=' + grid.dataSource._pageSize);
+
+            //update filter descriptor with the filters applied
+
+            href = href.replace(/filter=([^&]*)/, 'filter=' + (requestObject.filter || '~'));
+
+            // Update the 'href' attribute
+            $exportLink.attr('href', href);
+        });
+
+    </script>
+}
+

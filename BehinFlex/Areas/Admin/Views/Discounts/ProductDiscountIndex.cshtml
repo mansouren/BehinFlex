@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BehinFlex.Models.Discounts>
+
+@{
+    ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+    <hr/>
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.Products.ProductTitle).Width(150);
+              columns.Bound(model => model.Products.ProductPrice).Width(150);
+              columns.Bound(model => model.DiscountPercent).Width(150);
+              columns.Bound(item => item.DiscountID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                @Html.ActionLink("ویرایش", "ProductDiscountEdit", new {id = @item.DiscountID}, new {@class = "k-button k-button-icontext k-grid-Edit"})
+                                @Html.ActionLink("حذف", "ProductDiscountDelete", new {id = @item.DiscountID}, new {@class = "k-button k-button-icontext k-grid-Delete"})
+                             </text>).Width(160);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Custom().Action("ProductDiscountCreate", "Discounts").Text("افزودن");
+          }
+          )
+          .Groupable()
+          .Pageable()
+          .Sortable()
+          .Scrollable(scrollable => scrollable.Height("auto"))
+          .Filterable()
+
+          .DataSource(dataSource => dataSource
+              .Server()
+              .PageSize(10)
+              .Model(model => model.Id(item => item.DiscountID))
+          )
+          )
+
+</div> 

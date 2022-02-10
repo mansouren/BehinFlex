@@ -1,0 +1,132 @@
+﻿
+@model BehinFlex.Models.News
+
+@{
+    ViewBag.Title = "ویرایش " + Server.HtmlDecode(Html.DisplayNameFor(model => model).ToString());
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.NewsID)
+    @*@Html.HiddenFor(model => model.CreateDate)*@
+    <div class="hide">
+        @Html.HiddenFor(model => model.NewsImageUrl)
+        @Html.HiddenFor(model => model.NewsVideoUrl)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewsTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NewsTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewsTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewsDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NewsDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewsDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewsImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.Kendo().Upload().Name("NewsImageUrl").Multiple(false)
+            <img src="/NewsImage/Thumb/@Model.NewsImageUrl" class="thumbnail" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewsVideoUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.Kendo().Upload().Name("NewsVideoUrl").Multiple(false)
+            <br />
+            <video alt="Videos" class="thumbnail" width="320" height="240" controls>
+                <source src="/Videos/NewsVideos/@Model.NewsVideoUrl" type="video/mp4">
+                @*<source src="/Videos/NewsVideos/@Model.NewsVideoUrl" type="video/ogg" >*@
+            </video>
+            <br />
+            <p class="help-block">لطفا ویدیوها را با حجم کمتر از  100 مگابایت و با پسوند mp4 ارسال کنید</p>
+            @*@if (ViewBag.Message != null)
+                {
+                    <div class="text-danger">@ViewBag.Message</div>
+
+                }*@
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control", @id = "datepickerShamsi" } })
+            @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-10">
+
+            @Html.LabelFor(model => model.IsSeminar)
+            @Html.EditorFor(model => model.IsSeminar)
+            @Html.ValidationMessageFor(model => model.IsSeminar)
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group" id="buttons">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="ثبت" class="btn btn-primary" />
+            @Html.ActionLink("بازگشت به فهرست", "Index")
+        </div>
+    </div>
+
+
+    @section Script {
+
+        <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="~/scripts/JalaliDate.js"></script>
+
+        <script src="~/scripts/kendo.web.js"></script>
+        <script src="~/scripts/fa-IR.js"></script>
+        <script src="~/scripts/kendo.calendar.fa.js"></script>
+        <script src="~/scripts/kendo.datepicker.fa.js"></script>
+       
+        <script src="~/ckeditor/ckeditor.js"></script>
+        <script src="~/ckeditor/adapters/jquery.js"></script>
+
+        <script>
+            $(function () {
+                $('#NewsDescription').ckeditor();
+            });
+
+            $(document).ready(function () {
+
+                $("#datepickerShamsi").kendoDatePickerShamsi({ culture: "fa-IR" });
+
+
+
+            });
+
+        </script>
+
+    }
+
+</div>
+}
+
+

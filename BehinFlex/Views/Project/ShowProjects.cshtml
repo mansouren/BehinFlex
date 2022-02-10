@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BehinFlex.Models.Projects>
+
+@{
+    ViewBag.Title = "پروژه های انجام شده";
+}
+
+
+<div class="row">
+    <!--main content-->
+    <div class="col-md-12"  dir="rtl">
+        <div class="page-header">
+            <h2 style="font-family:'Times New Roman'">
+                پروژه های انجام شده<br /><br />
+                <small>پروژه هایی که شرکت با تامین مواد مورد نیاز در انجام آن سهیم بوده است.</small>
+            </h2>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4  col-sm-4 text-center">
+                    <div class="text-center">
+                        <img src="/ProjectImages/Image/@item.ProjectImageUrl" class="img-thumbnail" alt="...">
+                    </div>
+                    <h4 class="text-weight-strong" dir="rtl">
+                        پروژه بزرگ<br/> @item.ProjectTitle
+                    </h4>
+                    <p>
+                        <a href="/Project/ShowProjectDetail/@item.ProjectID" class="btn btn-more">اطلاعات بیشتر <i class="fa fa-angle-left"></i></a>
+                    </p>
+                </div>
+            }
+       
+        </div>
+    </div>
+</div>
+

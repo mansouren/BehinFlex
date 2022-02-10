@@ -1,0 +1,1393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="behinfarazModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bonuses">
+          <Key>
+            <PropertyRef Name="BonusId" />
+          </Key>
+          <Property Name="BonusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bonus" Type="int" Nullable="false" />
+          <Property Name="RefID" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="OrderId" Type="int" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CommentText" Type="ntext" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="CommentDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerType">
+          <Key>
+            <PropertyRef Name="CustomerTypeID" />
+          </Key>
+          <Property Name="CustomerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerTypeTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerTypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DiscountCodes">
+          <Key>
+            <PropertyRef Name="DiscountCodeID" />
+          </Key>
+          <Property Name="DiscountCodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="DiscountCodeTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiscountCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DiscountCodeExpireDate" Type="datetime" Nullable="false" />
+          <Property Name="DiscountPercent" Type="int" Nullable="false" />
+          <Property Name="DiscountMaxAmount" Type="int" Nullable="false" />
+          <Property Name="DiscountCodeUsageCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="DiscountPercent" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ImageID" />
+          </Key>
+          <Property Name="ImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NewsID" />
+          </Key>
+          <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NewsDescription" Type="ntext" Nullable="false" />
+          <Property Name="NewsImageUrl" Type="varchar" MaxLength="250" />
+          <Property Name="NewsVideoUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsSeminar" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="DetailId" />
+          </Key>
+          <Property Name="DetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="ProductCount" Type="int" Nullable="false" />
+          <Property Name="ProductPrice" Type="int" />
+          <Property Name="Sum" Type="int" />
+          <Property Name="SumWithDiscount" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DiscountCodeID" Type="int" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="IsFinally" Type="bit" Nullable="false" />
+          <Property Name="OrderTotalSum" Type="int" />
+          <Property Name="OrderTotalSumWithDiscount" Type="int" />
+          <Property Name="OrderTotalAfterDiscountCodeApply" Type="int" />
+        </EntityType>
+        <EntityType Name="OrganizationChart">
+          <Key>
+            <PropertyRef Name="OrgChartID" />
+          </Key>
+          <Property Name="OrgChartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrgChartPost" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OrgChartFullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OrgChartPhone" Type="varchar" MaxLength="50" />
+          <Property Name="OrgChartEmail" Type="varchar" MaxLength="250" />
+          <Property Name="OrgChartTelegramID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductBrand">
+          <Key>
+            <PropertyRef Name="ProductBrandID" />
+          </Key>
+          <Property Name="ProductBrandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductBrandTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductGalleries">
+          <Key>
+            <PropertyRef Name="GalleryID" />
+          </Key>
+          <Property Name="GalleryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ImageName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ProductGroup">
+          <Key>
+            <PropertyRef Name="ProductGroupID" />
+          </Key>
+          <Property Name="ProductGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductBrandID" Type="int" Nullable="false" />
+          <Property Name="ProductGroupTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductSubGroupID" Type="int" Nullable="false" />
+          <Property Name="ProductTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ProductEnTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProductDetails" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Size" Type="nvarchar" MaxLength="150" />
+          <Property Name="ProductDescription" Type="ntext" Nullable="false" />
+          <Property Name="ProductPrice" Type="int" Nullable="false" />
+          <Property Name="ProductImageUrl" Type="varchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="IsSpecial" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductSubGroup">
+          <Key>
+            <PropertyRef Name="ProductSubGroupID" />
+          </Key>
+          <Property Name="ProductSubGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductGroupID" Type="int" Nullable="false" />
+          <Property Name="ProductSubGroupTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProjectDescription" Type="ntext" />
+          <Property Name="ProjectImageUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RefCode">
+          <Key>
+            <PropertyRef Name="RefID" />
+          </Key>
+          <Property Name="RefID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ref_Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+          <Property Name="RoleTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seminarparticipants">
+          <Key>
+            <PropertyRef Name="SeminarID" />
+          </Key>
+          <Property Name="SeminarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsID" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="CustomerTypeID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VideoTitle" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="VideoUrl" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Bonuses_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Bonuses" Type="Self.Bonuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Bonuses">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bonuses_RefCode">
+          <End Role="RefCode" Type="Self.RefCode" Multiplicity="0..1" />
+          <End Role="Bonuses" Type="Self.Bonuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RefCode">
+              <PropertyRef Name="RefID" />
+            </Principal>
+            <Dependent Role="Bonuses">
+              <PropertyRef Name="RefID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bonuses_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Bonuses" Type="Self.Bonuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Bonuses">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiscountCodes_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="DiscountCodes" Type="Self.DiscountCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DiscountCodes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Discounts_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Discounts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_DiscountCodes">
+          <End Role="DiscountCodes" Type="Self.DiscountCodes" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiscountCodes">
+              <PropertyRef Name="DiscountCodeID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="DiscountCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductGalleries_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ProductGalleries" Type="Self.ProductGalleries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductGalleries">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductGroup_ProductBrand">
+          <End Role="ProductBrand" Type="Self.ProductBrand" Multiplicity="1" />
+          <End Role="ProductGroup" Type="Self.ProductGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBrand">
+              <PropertyRef Name="ProductBrandID" />
+            </Principal>
+            <Dependent Role="ProductGroup">
+              <PropertyRef Name="ProductBrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ProductSubGroup">
+          <End Role="ProductSubGroup" Type="Self.ProductSubGroup" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSubGroup">
+              <PropertyRef Name="ProductSubGroupID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProductSubGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductSubGroup_ProductGroup">
+          <End Role="ProductGroup" Type="Self.ProductGroup" Multiplicity="1" />
+          <End Role="ProductSubGroup" Type="Self.ProductSubGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductGroup">
+              <PropertyRef Name="ProductGroupID" />
+            </Principal>
+            <Dependent Role="ProductSubGroup">
+              <PropertyRef Name="ProductGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefCode_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="RefCode" Type="Self.RefCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RefCode">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seminarparticipants_News">
+          <End Role="News" Type="Self.News" Multiplicity="1" />
+          <End Role="Seminarparticipants" Type="Self.Seminarparticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="NewsID" />
+            </Principal>
+            <Dependent Role="Seminarparticipants">
+              <PropertyRef Name="NewsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_CustomerType">
+          <End Role="CustomerType" Type="Self.CustomerType" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerType">
+              <PropertyRef Name="CustomerTypeID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="CustomerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="behinfarazModelStoreContainer">
+          <EntitySet Name="Bonuses" EntityType="Self.Bonuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerType" EntityType="Self.CustomerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiscountCodes" EntityType="Self.DiscountCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganizationChart" EntityType="Self.OrganizationChart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductBrand" EntityType="Self.ProductBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductGalleries" EntityType="Self.ProductGalleries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductGroup" EntityType="Self.ProductGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductSubGroup" EntityType="Self.ProductSubGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RefCode" EntityType="Self.RefCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seminarparticipants" EntityType="Self.Seminarparticipants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bonuses_Orders" Association="Self.FK_Bonuses_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Bonuses" EntitySet="Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bonuses_RefCode" Association="Self.FK_Bonuses_RefCode">
+            <End Role="RefCode" EntitySet="RefCode" />
+            <End Role="Bonuses" EntitySet="Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bonuses_Users1" Association="Self.FK_Bonuses_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bonuses" EntitySet="Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Products" Association="Self.FK_Comments_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiscountCodes_Users" Association="Self.FK_DiscountCodes_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DiscountCodes" EntitySet="DiscountCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discounts_Products" Association="Self.FK_Discounts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Discounts" EntitySet="Discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_DiscountCodes" Association="Self.FK_Orders_DiscountCodes">
+            <End Role="DiscountCodes" EntitySet="DiscountCodes" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductGalleries_Products" Association="Self.FK_ProductGalleries_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductGalleries" EntitySet="ProductGalleries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductGroup_ProductBrand" Association="Self.FK_ProductGroup_ProductBrand">
+            <End Role="ProductBrand" EntitySet="ProductBrand" />
+            <End Role="ProductGroup" EntitySet="ProductGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ProductSubGroup" Association="Self.FK_Products_ProductSubGroup">
+            <End Role="ProductSubGroup" EntitySet="ProductSubGroup" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductSubGroup_ProductGroup" Association="Self.FK_ProductSubGroup_ProductGroup">
+            <End Role="ProductGroup" EntitySet="ProductGroup" />
+            <End Role="ProductSubGroup" EntitySet="ProductSubGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefCode_Users" Association="Self.FK_RefCode_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RefCode" EntitySet="RefCode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seminarparticipants_News" Association="Self.FK_Seminarparticipants_News">
+            <End Role="News" EntitySet="News" />
+            <End Role="Seminarparticipants" EntitySet="Seminarparticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_CustomerType" Association="Self.FK_Users_CustomerType">
+            <End Role="CustomerType" EntitySet="CustomerType" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="behinfarazModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CommentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Comments_Users" FromRole="Comments" ToRole="Users" />
+          <NavigationProperty Name="Products" Relationship="behinfarazModel.FK_Comments_Products" FromRole="Comments" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="CustomerType">
+          <Key>
+            <PropertyRef Name="CustomerTypeID" />
+          </Key>
+          <Property Name="CustomerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerTypeTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_CustomerType" FromRole="CustomerType" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ImageID" />
+          </Key>
+          <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NewsID" />
+          </Key>
+          <Property Name="NewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NewsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NewsImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NewsVideoUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsSeminar" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Seminarparticipants" Relationship="Self.FK_Seminarparticipants_News" FromRole="News" ToRole="Seminarparticipants" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="DetailId" />
+          </Key>
+          <Property Name="DetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="ProductCount" Type="Int32" Nullable="false" />
+          <Property Name="ProductPrice" Type="Int32" />
+          <Property Name="Sum" Type="Int32" />
+          <Property Name="SumWithDiscount" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="behinfarazModel.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="behinfarazModel.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="OrganizationChart">
+          <Key>
+            <PropertyRef Name="OrgChartID" />
+          </Key>
+          <Property Name="OrgChartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrgChartPost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrgChartFullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrgChartPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrgChartEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="OrgChartTelegramID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductBrand">
+          <Key>
+            <PropertyRef Name="ProductBrandID" />
+          </Key>
+          <Property Name="ProductBrandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductBrandTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProductGroup" Relationship="Self.FK_ProductGroup_ProductBrand" FromRole="ProductBrand" ToRole="ProductGroup" />
+        </EntityType>
+        <EntityType Name="ProductGalleries">
+          <Key>
+            <PropertyRef Name="GalleryID" />
+          </Key>
+          <Property Name="GalleryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ImageName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="behinfarazModel.FK_ProductGalleries_Products" FromRole="ProductGalleries" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ProductGroup">
+          <Key>
+            <PropertyRef Name="ProductGroupID" />
+          </Key>
+          <Property Name="ProductGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductBrandID" Type="Int32" Nullable="false" />
+          <Property Name="ProductGroupTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProductBrand" Relationship="Self.FK_ProductGroup_ProductBrand" FromRole="ProductGroup" ToRole="ProductBrand" />
+          <NavigationProperty Name="ProductSubGroup" Relationship="Self.FK_ProductSubGroup_ProductGroup" FromRole="ProductGroup" ToRole="ProductSubGroup" />
+        </EntityType>
+        <EntityType Name="ProductSubGroup">
+          <Key>
+            <PropertyRef Name="ProductSubGroupID" />
+          </Key>
+          <Property Name="ProductSubGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductGroupID" Type="Int32" Nullable="false" />
+          <Property Name="ProductSubGroupTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProductGroup" Relationship="Self.FK_ProductSubGroup_ProductGroup" FromRole="ProductSubGroup" ToRole="ProductGroup" />
+          <NavigationProperty Name="Products" Relationship="behinfarazModel.FK_Products_ProductSubGroup" FromRole="ProductSubGroup" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectImageUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Seminarparticipants">
+          <Key>
+            <PropertyRef Name="SeminarID" />
+          </Key>
+          <Property Name="SeminarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsID" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="News" Relationship="Self.FK_Seminarparticipants_News" FromRole="Seminarparticipants" ToRole="News" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerTypeID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Users" FromRole="Users" ToRole="Comments" />
+          <NavigationProperty Name="CustomerType" Relationship="Self.FK_Users_CustomerType" FromRole="Users" ToRole="CustomerType" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="RefCode" Relationship="behinfarazModel.FK_RefCode_Users" FromRole="Users" ToRole="RefCode" />
+          <NavigationProperty Name="Bonuses" Relationship="behinfarazModel.FK_Bonuses_Users1" FromRole="Users" ToRole="Bonuses" />
+          <NavigationProperty Name="Orders" Relationship="behinfarazModel.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="DiscountCodes" Relationship="behinfarazModel.FK_DiscountCodes_Users" FromRole="Users" ToRole="DiscountCodes" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VideoTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VideoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Comments_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_CustomerType">
+          <End Role="CustomerType" Type="Self.CustomerType" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerType">
+              <PropertyRef Name="CustomerTypeID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="CustomerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seminarparticipants_News">
+          <End Role="News" Type="Self.News" Multiplicity="1" />
+          <End Role="Seminarparticipants" Type="Self.Seminarparticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="NewsID" />
+            </Principal>
+            <Dependent Role="Seminarparticipants">
+              <PropertyRef Name="NewsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductGroup_ProductBrand">
+          <End Role="ProductBrand" Type="Self.ProductBrand" Multiplicity="1" />
+          <End Role="ProductGroup" Type="Self.ProductGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBrand">
+              <PropertyRef Name="ProductBrandID" />
+            </Principal>
+            <Dependent Role="ProductGroup">
+              <PropertyRef Name="ProductBrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductSubGroup_ProductGroup">
+          <End Role="ProductGroup" Type="Self.ProductGroup" Multiplicity="1" />
+          <End Role="ProductSubGroup" Type="Self.ProductSubGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductGroup">
+              <PropertyRef Name="ProductGroupID" />
+            </Principal>
+            <Dependent Role="ProductSubGroup">
+              <PropertyRef Name="ProductGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="behinfarazEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="Self.Comments" />
+          <EntitySet Name="CustomerType" EntityType="Self.CustomerType" />
+          <EntitySet Name="Images" EntityType="Self.Images" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" />
+          <EntitySet Name="OrganizationChart" EntityType="Self.OrganizationChart" />
+          <EntitySet Name="ProductBrand" EntityType="Self.ProductBrand" />
+          <EntitySet Name="ProductGalleries" EntityType="Self.ProductGalleries" />
+          <EntitySet Name="ProductGroup" EntityType="Self.ProductGroup" />
+          <EntitySet Name="ProductSubGroup" EntityType="Self.ProductSubGroup" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Seminarparticipants" EntityType="Self.Seminarparticipants" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Videos" EntityType="Self.Videos" />
+          <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_CustomerType" Association="Self.FK_Users_CustomerType">
+            <End Role="CustomerType" EntitySet="CustomerType" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seminarparticipants_News" Association="Self.FK_Seminarparticipants_News">
+            <End Role="News" EntitySet="News" />
+            <End Role="Seminarparticipants" EntitySet="Seminarparticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductGroup_ProductBrand" Association="Self.FK_ProductGroup_ProductBrand">
+            <End Role="ProductBrand" EntitySet="ProductBrand" />
+            <End Role="ProductGroup" EntitySet="ProductGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductSubGroup_ProductGroup" Association="Self.FK_ProductSubGroup_ProductGroup">
+            <End Role="ProductGroup" EntitySet="ProductGroup" />
+            <End Role="ProductSubGroup" EntitySet="ProductSubGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="RefCode" EntityType="behinfarazModel.RefCode" />
+          <AssociationSet Name="FK_RefCode_Users" Association="behinfarazModel.FK_RefCode_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RefCode" EntitySet="RefCode" />
+          </AssociationSet>
+          <EntitySet Name="Bonuses" EntityType="behinfarazModel.Bonuses" />
+          <EntitySet Name="Orders" EntityType="behinfarazModel.Orders" />
+          <AssociationSet Name="FK_Bonuses_Orders" Association="behinfarazModel.FK_Bonuses_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Bonuses" EntitySet="Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bonuses_RefCode" Association="behinfarazModel.FK_Bonuses_RefCode">
+            <End Role="RefCode" EntitySet="RefCode" />
+            <End Role="Bonuses" EntitySet="Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bonuses_Users1" Association="behinfarazModel.FK_Bonuses_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bonuses" EntitySet="Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="behinfarazModel.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="behinfarazModel.FK_Orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Products" EntityType="behinfarazModel.Products" />
+          <AssociationSet Name="FK_Comments_Products" Association="behinfarazModel.FK_Comments_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Products" Association="behinfarazModel.FK_OrderDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductGalleries_Products" Association="behinfarazModel.FK_ProductGalleries_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductGalleries" EntitySet="ProductGalleries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ProductSubGroup" Association="behinfarazModel.FK_Products_ProductSubGroup">
+            <End Role="ProductSubGroup" EntitySet="ProductSubGroup" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="DiscountCodes" EntityType="behinfarazModel.DiscountCodes" />
+          <AssociationSet Name="FK_DiscountCodes_Users" Association="behinfarazModel.FK_DiscountCodes_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DiscountCodes" EntitySet="DiscountCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_DiscountCodes" Association="behinfarazModel.FK_Orders_DiscountCodes">
+            <End Role="DiscountCodes" EntitySet="DiscountCodes" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Discounts" EntityType="behinfarazModel.Discounts" />
+          <AssociationSet Name="FK_Discounts_Products" Association="behinfarazModel.FK_Discounts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Discounts" EntitySet="Discounts" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="RefCode">
+          <Key>
+            <PropertyRef Name="RefID" />
+          </Key>
+          <Property Name="RefID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ref_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="behinfarazModel.FK_RefCode_Users" FromRole="RefCode" ToRole="Users" />
+          <NavigationProperty Name="Bonuses" Relationship="behinfarazModel.FK_Bonuses_RefCode" FromRole="RefCode" ToRole="Bonuses" />
+        </EntityType>
+        <Association Name="FK_RefCode_Users">
+          <End Type="behinfarazModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="behinfarazModel.RefCode" Role="RefCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RefCode">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Bonuses">
+          <Key>
+            <PropertyRef Name="BonusId" />
+          </Key>
+          <Property Name="BonusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bonus" Type="Int32" Nullable="false" />
+          <Property Name="RefID" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="behinfarazModel.FK_Bonuses_Orders" FromRole="Bonuses" ToRole="Orders" />
+          <NavigationProperty Name="RefCode" Relationship="behinfarazModel.FK_Bonuses_RefCode" FromRole="Bonuses" ToRole="RefCode" />
+          <NavigationProperty Name="Users" Relationship="behinfarazModel.FK_Bonuses_Users1" FromRole="Bonuses" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsFinally" Type="Boolean" Nullable="false" />
+          <Property Name="OrderTotalSum" Type="Int32" />
+          <Property Name="OrderTotalSumWithDiscount" Type="Int32" />
+          <NavigationProperty Name="Bonuses" Relationship="behinfarazModel.FK_Bonuses_Orders" FromRole="Orders" ToRole="Bonuses" />
+          <NavigationProperty Name="OrderDetails" Relationship="behinfarazModel.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="Users" Relationship="behinfarazModel.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
+          <Property Name="DiscountCodeID" Type="Int32" />
+          <Property Name="OrderTotalAfterDiscountCodeApply" Type="Int32" />
+          <NavigationProperty Name="DiscountCodes" Relationship="behinfarazModel.FK_Orders_DiscountCodes" FromRole="Orders" ToRole="DiscountCodes" />
+        </EntityType>
+        <Association Name="FK_Bonuses_Orders">
+          <End Type="behinfarazModel.Orders" Role="Orders" Multiplicity="0..1" />
+          <End Type="behinfarazModel.Bonuses" Role="Bonuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Bonuses">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bonuses_RefCode">
+          <End Type="behinfarazModel.RefCode" Role="RefCode" Multiplicity="0..1" />
+          <End Type="behinfarazModel.Bonuses" Role="Bonuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RefCode">
+              <PropertyRef Name="RefID" />
+            </Principal>
+            <Dependent Role="Bonuses">
+              <PropertyRef Name="RefID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bonuses_Users1">
+          <End Type="behinfarazModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="behinfarazModel.Bonuses" Role="Bonuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Bonuses">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Type="behinfarazModel.Orders" Role="Orders" Multiplicity="1" />
+          <End Type="behinfarazModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Users">
+          <End Type="behinfarazModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="behinfarazModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSubGroupID" Type="Int32" Nullable="false" />
+          <Property Name="ProductTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProductEnTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProductDetails" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ProductDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductPrice" Type="Int32" Nullable="false" />
+          <Property Name="ProductImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="IsSpecial" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="behinfarazModel.FK_Comments_Products" FromRole="Products" ToRole="Comments" />
+          <NavigationProperty Name="OrderDetails" Relationship="behinfarazModel.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
+          <NavigationProperty Name="ProductGalleries" Relationship="behinfarazModel.FK_ProductGalleries_Products" FromRole="Products" ToRole="ProductGalleries" />
+          <NavigationProperty Name="ProductSubGroup" Relationship="behinfarazModel.FK_Products_ProductSubGroup" FromRole="Products" ToRole="ProductSubGroup" />
+          <NavigationProperty Name="Discounts" Relationship="behinfarazModel.FK_Discounts_Products" FromRole="Products" ToRole="Discounts" />
+        </EntityType>
+        <Association Name="FK_Comments_Products">
+          <End Type="behinfarazModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="behinfarazModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Products">
+          <End Type="behinfarazModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="behinfarazModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductGalleries_Products">
+          <End Type="behinfarazModel.Products" Role="Products" Multiplicity="0..1" />
+          <End Type="behinfarazModel.ProductGalleries" Role="ProductGalleries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductGalleries">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ProductSubGroup">
+          <End Type="behinfarazModel.ProductSubGroup" Role="ProductSubGroup" Multiplicity="1" />
+          <End Type="behinfarazModel.Products" Role="Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSubGroup">
+              <PropertyRef Name="ProductSubGroupID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProductSubGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DiscountCodes">
+          <Key>
+            <PropertyRef Name="DiscountCodeID" />
+          </Key>
+          <Property Name="DiscountCodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="DiscountCodeTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountCodeExpireDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DiscountPercent" Type="Int32" Nullable="false" />
+          <Property Name="DiscountMaxAmount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="behinfarazModel.FK_DiscountCodes_Users" FromRole="DiscountCodes" ToRole="Users" />
+          <Property Name="DiscountCodeUsageCount" Type="Int32" Nullable="false" />
+          <Property Name="DiscountCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="behinfarazModel.FK_Orders_DiscountCodes" FromRole="DiscountCodes" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK_DiscountCodes_Users">
+          <End Type="behinfarazModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="behinfarazModel.DiscountCodes" Role="DiscountCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="DiscountCodes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_DiscountCodes">
+          <End Type="behinfarazModel.DiscountCodes" Role="DiscountCodes" Multiplicity="0..1" />
+          <End Type="behinfarazModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiscountCodes">
+              <PropertyRef Name="DiscountCodeID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="DiscountCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="DiscountPercent" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="behinfarazModel.FK_Discounts_Products" FromRole="Discounts" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_Discounts_Products">
+          <End Type="behinfarazModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="behinfarazModel.Discounts" Role="Discounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Discounts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="behinfarazModelStoreContainer" CdmEntityContainer="behinfarazEntities">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="behinfarazModel.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerType">
+            <EntityTypeMapping TypeName="behinfarazModel.CustomerType">
+              <MappingFragment StoreEntitySet="CustomerType">
+                <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
+                <ScalarProperty Name="CustomerTypeTitle" ColumnName="CustomerTypeTitle" />
+                <ScalarProperty Name="CustomerTypeName" ColumnName="CustomerTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="behinfarazModel.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+                <ScalarProperty Name="ImageTitle" ColumnName="ImageTitle" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="behinfarazModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+                <ScalarProperty Name="NewsTitle" ColumnName="NewsTitle" />
+                <ScalarProperty Name="NewsDescription" ColumnName="NewsDescription" />
+                <ScalarProperty Name="NewsImageUrl" ColumnName="NewsImageUrl" />
+                <ScalarProperty Name="NewsVideoUrl" ColumnName="NewsVideoUrl" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsSeminar" ColumnName="IsSeminar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="behinfarazModel.OrderDetails">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="DetailId" ColumnName="DetailId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductCount" ColumnName="ProductCount" />
+                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="SumWithDiscount" ColumnName="SumWithDiscount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganizationChart">
+            <EntityTypeMapping TypeName="behinfarazModel.OrganizationChart">
+              <MappingFragment StoreEntitySet="OrganizationChart">
+                <ScalarProperty Name="OrgChartID" ColumnName="OrgChartID" />
+                <ScalarProperty Name="OrgChartPost" ColumnName="OrgChartPost" />
+                <ScalarProperty Name="OrgChartFullName" ColumnName="OrgChartFullName" />
+                <ScalarProperty Name="OrgChartPhone" ColumnName="OrgChartPhone" />
+                <ScalarProperty Name="OrgChartEmail" ColumnName="OrgChartEmail" />
+                <ScalarProperty Name="OrgChartTelegramID" ColumnName="OrgChartTelegramID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductBrand">
+            <EntityTypeMapping TypeName="behinfarazModel.ProductBrand">
+              <MappingFragment StoreEntitySet="ProductBrand">
+                <ScalarProperty Name="ProductBrandID" ColumnName="ProductBrandID" />
+                <ScalarProperty Name="ProductBrandTitle" ColumnName="ProductBrandTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductGalleries">
+            <EntityTypeMapping TypeName="behinfarazModel.ProductGalleries">
+              <MappingFragment StoreEntitySet="ProductGalleries">
+                <ScalarProperty Name="GalleryID" ColumnName="GalleryID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductGroup">
+            <EntityTypeMapping TypeName="behinfarazModel.ProductGroup">
+              <MappingFragment StoreEntitySet="ProductGroup">
+                <ScalarProperty Name="ProductGroupID" ColumnName="ProductGroupID" />
+                <ScalarProperty Name="ProductBrandID" ColumnName="ProductBrandID" />
+                <ScalarProperty Name="ProductGroupTitle" ColumnName="ProductGroupTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductSubGroup">
+            <EntityTypeMapping TypeName="behinfarazModel.ProductSubGroup">
+              <MappingFragment StoreEntitySet="ProductSubGroup">
+                <ScalarProperty Name="ProductSubGroupID" ColumnName="ProductSubGroupID" />
+                <ScalarProperty Name="ProductGroupID" ColumnName="ProductGroupID" />
+                <ScalarProperty Name="ProductSubGroupTitle" ColumnName="ProductSubGroupTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="behinfarazModel.Projects">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+                <ScalarProperty Name="ProjectImageUrl" ColumnName="ProjectImageUrl" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="behinfarazModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleTitle" ColumnName="RoleTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seminarparticipants">
+            <EntityTypeMapping TypeName="behinfarazModel.Seminarparticipants">
+              <MappingFragment StoreEntitySet="Seminarparticipants">
+                <ScalarProperty Name="SeminarID" ColumnName="SeminarID" />
+                <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="behinfarazModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Videos">
+            <EntityTypeMapping TypeName="behinfarazModel.Videos">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+                <ScalarProperty Name="VideoTitle" ColumnName="VideoTitle" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RefCode">
+            <EntityTypeMapping TypeName="behinfarazModel.RefCode">
+              <MappingFragment StoreEntitySet="RefCode">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Ref_Code" ColumnName="Ref_Code" />
+                <ScalarProperty Name="RefID" ColumnName="RefID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bonuses">
+            <EntityTypeMapping TypeName="behinfarazModel.Bonuses">
+              <MappingFragment StoreEntitySet="Bonuses">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RefID" ColumnName="RefID" />
+                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+                <ScalarProperty Name="BonusId" ColumnName="BonusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="behinfarazModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderTotalAfterDiscountCodeApply" ColumnName="OrderTotalAfterDiscountCodeApply" />
+                <ScalarProperty Name="DiscountCodeID" ColumnName="DiscountCodeID" />
+                <ScalarProperty Name="OrderTotalSumWithDiscount" ColumnName="OrderTotalSumWithDiscount" />
+                <ScalarProperty Name="OrderTotalSum" ColumnName="OrderTotalSum" />
+                <ScalarProperty Name="IsFinally" ColumnName="IsFinally" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="behinfarazModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="IsSpecial" ColumnName="IsSpecial" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ProductImageUrl" ColumnName="ProductImageUrl" />
+                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="ProductDetails" ColumnName="ProductDetails" />
+                <ScalarProperty Name="ProductEnTitle" ColumnName="ProductEnTitle" />
+                <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
+                <ScalarProperty Name="ProductSubGroupID" ColumnName="ProductSubGroupID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiscountCodes">
+            <EntityTypeMapping TypeName="behinfarazModel.DiscountCodes">
+              <MappingFragment StoreEntitySet="DiscountCodes">
+                <ScalarProperty Name="DiscountCode" ColumnName="DiscountCode" />
+                <ScalarProperty Name="DiscountCodeUsageCount" ColumnName="DiscountCodeUsageCount" />
+                <ScalarProperty Name="DiscountMaxAmount" ColumnName="DiscountMaxAmount" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="DiscountCodeExpireDate" ColumnName="DiscountCodeExpireDate" />
+                <ScalarProperty Name="DiscountCodeTitle" ColumnName="DiscountCodeTitle" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DiscountCodeID" ColumnName="DiscountCodeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="behinfarazModel.Discounts">
+              <MappingFragment StoreEntitySet="Discounts">
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

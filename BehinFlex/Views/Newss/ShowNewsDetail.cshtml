@@ -1,0 +1,48 @@
+﻿@model BehinFlex.Models.News
+
+@{
+    ViewBag.Title = "جزئیات خبر";
+}  
+   
+    
+<div class="thumbnail  ">
+    <div class="well well-sm text-right" style="overflow: hidden; padding:20px; color:#348589;"><b>
+        @Model.NewsTitle
+    </b></div>
+    @if(Model.NewsImageUrl!=null && Model.NewsImageUrl!= "no-photo.jpg")
+    {
+    <div style="padding-left: 10px;">
+        <img class="thumbnail pull-left " src="/NewsImage/Images/@Model.NewsImageUrl" width="220" />
+    </div> 
+    }
+    
+        @if (Model.NewsVideoUrl != null && Model.NewsVideoUrl != "no-video.jpg")
+     {
+        <div style="padding-right: 10px;">
+        <video alt="Videos" class="thumbnail" width="220" height="160" controls>
+            <source src="~/Videos/NewsVideos/@Model.NewsVideoUrl" type="video/mp4">
+            <source src="~/Videos/NewsVideos/@Model.NewsVideoUrl" type="video/ogg">
+        </video>
+       </div>
+     }
+    
+    <div class="pull-right"><font color="#348589"><br /><b>تاریخ :</b></font>
+        @Model.CreateDate.ToString("yyyy/MM/dd")
+    </div>
+    <br /><br /><br />
+
+    <div class="pull-right">
+        @Html.Raw(Model.NewsDescription)
+    </div>
+    <hr style="clear: both;" />
+
+    
+    
+    
+</div> 
+
+
+
+
+
+    

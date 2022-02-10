@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title - Behin Flex Company</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Facebook Opengraph integration: https://developers.facebook.com/docs/sharing/opengraph -->
+    <meta property="og:title" content="">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+
+    <!-- Twitter Cards integration: https://dev.twitter.com/cards/  -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/img/icons/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/icons/114x114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/icons/72x72.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/icons/default.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+
+
+    <link href="/Content/bootstrap-rtl.css" rel="stylesheet" />
+
+    <!-- Libraries CSS Files -->
+    @*<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">*@
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome-pro/css/all.min.css" rel="stylesheet" />
+    <link href="/lib/owlcarousel/owl.carousel.min.css" rel="stylesheet">
+    <link href="/lib/owlcarousel/owl.theme.min.css" rel="stylesheet">
+    <link href="/lib/owlcarousel/owl.transitions.min.css" rel="stylesheet">
+
+    <!-- Main Stylesheet File -->
+    
+    <link href="@Url.VersionedContent("~/css/style.css")" rel="stylesheet">
+    <link href="@Url.VersionedContent("~/css/mrbs.css")" rel="stylesheet">
+    @*<link href="/css/mrbs.css" rel="stylesheet" />*@
+    <script src="~/scripts/SweetAlert/sweetalert2.all.min.js"></script>
+    <link href="~/Content/persian_fonts/css/IranSans.css" rel="stylesheet" />
+    <link href="~/Content/persian_fonts/css/FontIran_Override.css" rel="stylesheet" />
+</head>
+
+
+<!-- ======== Region: body ======== -->
+
+
+<body class="page-about">
+
+    <div id="background-wrapper" class="buildings" data-stellar-background-ratio="0.1">
+
+        <!-- ======== Region: #navigation ======== -->
+        <div id="navigation" class="wrapper">
+            <!--Hidden Header Region-->
+            <div class="header-hidden collapse">
+                <div class="header-hidden-inner container">
+                    <div class="row">
+                        <div class="col-md-3  hidden-sm  hidden-xs" dir="rtl">
+                            <!--todo: replace with company contact details-->
+                            <h3>
+                                تماس با ما
+                            </h3>
+                            <address>
+                                <strong>شرکت بهین فلکس</strong><br />
+                                <abbr title="Address"><i class="fa fa-pushpin"></i></abbr>
+                                تهران، خیابان بخارست، کوچه دهم، پلاک 25، طبقه دوم، واحد 4
+                                <br>
+                                <i class="fa fa-phone"></i>
+                                88944188-9
+                                <br>
+                                <i class="fa fa-envelope-o"></i> info@behinflex.com
+                            </address>
+                        </div>
+
+
+                        <div class="col-md-3 col-sm-4 hidden-xs" dir="rtl">
+                            <h3>
+                                گواهینامه فنی
+                            </h3>
+                            <p><font color="#2b565c">مرکز تحقیقات راه ، مسکن و شهر سازی </font></p>
+                        </div>
+                        <div class="col-md-3 col-sm-4 hidden-xs">
+                            <img src="/img/slides/slide.png" width="320" height="210" />
+                        </div>
+
+                        <div class="col-md-3 col-sm-4" dir="rtl">
+                            <h4 class="text-uppercase">
+                                &nbsp; ما را دنبال کنید در :
+                            </h4>
+                            <!--social media icons-->
+                            <div class="social-media social-media-stacked" dir="rtl">
+
+                                <a href="https://www.instagram.com/behinflex_co/"><i class="fa fa-instagram fa-fw"></i><font color="#306168">&nbsp; Instagram </font></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Header & navbar-branding region-->
+            <div class="header">
+                <div class="header-inner container">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-7 col-xs-6" align="right">
+                            <div class="navbar-slogan bottom" align="right">
+                                تضمین ما
+                                <br> حرکت به سمت آینده ای روشن
+                            </div>
+                            <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
+                            <a class="navbar-brand" href="/Home/Index" title="Home">
+                                <h1 class="hidden" align="right"><img src="/img/logo.png" alt="Behin Flex">Behin Flex</h1>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2 col-sm-0 col-xs-0"></div>
+
+                        <div class="col-md-5 col-sm-5 col-xs-6 pull-left" align="left">
+                            <ul class="list-inline user-menu pull-left"><li class="user-button"><a class="btn btn-primary btn-hh-trigger" role="button" data-toggle="collapse" data-target=".header-hidden">باز شدن</a></li></ul>
+                            <ul class="list-inline user-menu pull-left">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li class="user-login"><a href="/Account/Signout" class="text-uppercase"><strong>خروج </strong></a><i class="fa fa-sign-out text-primary"></i></li>
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        <li class="user-register"><a href="/Admin/Default/Index" class="text-uppercase"><strong> بخش مدیریت </strong></a><i class="fa fa-edit text-primary "></i></li>
+                                    }
+                                    <li class="user-register"><strong> @User.Identity.Name </strong><i class="fa fa-info text-primary"></i></li>
+
+                                }
+
+                                else
+                                {
+                                    <li class="user-login"><a href="/Account/Login" class="text-uppercase"><strong>ورود </strong></a><i class="fa fa-sign-in text-primary"></i></li>
+                                    <li class="user-register"><a href="/Account/Register" class="text-uppercase"><strong>عضویت </strong></a><i class="fa fa-edit text-primary"></i></li>
+                                    <li class="user-register"><strong>کاربر مهمان  </strong><i class="fa fa-info text-primary"></i></li>
+
+                                }
+                                <li class="shopping-basket"><a href="/ShoppingCart/Index" id="CountShopCart" class="text-uppercase" > <strong> مشاهده پیش فاکتور </strong> </a><i class="fa fa-credit-card text-primary"></i></li>
+                            </ul>
+
+                        </div>
+                        <!--header rightside-->
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row" id="infoSysMainMenu">
+                    <nav class="navbar navbar-inverse" role="navigation">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class="active"><a href="/Home/Index"><span class="glyphicon glyphicon-home"></span></a></li>
+                                    <li class="active"><a href="/Newss/ShowNews">اخبار</a></li>
+                                    <li class="mrbs dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"> محصولات <b class="caret"></b></a>
+                                        @Html.Action("ShowGroup", "Product")
+                                    </li>
+                                    
+                                    <li class="mrbs dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="/Home/About"> بهین فلکس <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/Home/About"><span class="glyphicon glyphicon-asterisk"></span> درباره ما </a></li>
+                                            <li><a href="/Home/ContactUs"><span class="glyphicon glyphicon-asterisk"></span> تماس با ما </a></li>
+                                            <li><a href="/OrganizationChart/AboutPost"><span class="glyphicon glyphicon-asterisk"></span> ساختار سازمانی </a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown" dir="rtl">
+                                        <a href="" class="dropdown-toggle" data-toggle="dropdown">خدمات ویژه <b class="caret"></b></a>
+                                        <!-- Dropdown Menu -->
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/Home/ShowAllProducts"><span class="glyphicon glyphicon-asterisk"></span> ثبت پیش فاکتور </a></li>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <li><a href="/Home/GetReferalCode"><span class="glyphicon glyphicon-asterisk"></span> باشگاه مشتریان</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/Account/Register"><span class="glyphicon glyphicon-asterisk"></span> باشگاه مشتریان</a></li>
+                                            }
+                                            <li><a href="/Home/MapRequest"><span class="glyphicon glyphicon-asterisk"></span> درخواست نقشه کشی </a></li>
+                                            <li><a href="/Home/Transport"><span class="glyphicon glyphicon-asterisk"></span> نحوه ارسال کالا </a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="active"><a href="/ImageGallery/ShowGallery">تصاویر</a></li>
+                                    <li class="active"><a href="/Project/ShowProjects">پروژه ها</a></li>
+                                    <li class="active"><a href="/Home/certificate">گواهینامه ها</a></li>
+                                </ul>
+                            </div><!-- /.navbar-collapse -->
+                        </div><!-- /.container-fluid -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ======== Region: #content ======== -->
+    <div id="content" style="min-height:72%">
+        <div class="container" id="about" dir="rtl">
+            @RenderBody()
+        </div>
+    </div>
+    <!-- Call out block -->
+    <!-- ======== Region: #footer ======== -->
+    <footer id="footer" style="background-color:#01747b;">
+        <div class="container">
+            <div class="row subfooter1">
+                <div class="col-md-5">
+                    <ul class="list-inline pull-right">
+                        <li><a href="/Project/ShowProjects">پروژه ها</a></li>
+                        <li><a href="/ImageGallery/ShowGallery">گالری</a></li>
+                        <li><a href="/Home/ShowAllProducts">محصولات</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-7">
+                    <font color="#07b1bb">
+                        <p>.تمامی حقوق برای بهین فراز پایدار (بهین فلکس) محفوظ می باشد</p>
+                    </font>
+                </div>
+            </div>
+
+            <a href="#top" class="scrolltop">Top</a>
+        </div>
+    </footer>
+
+
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/lib/stellar/stellar.min.js"></script>
+    <script src="/lib/waypoints/waypoints.min.js"></script>
+    <script src="/lib/counterup/counterup.min.js"></script>
+
+
+    <!-- Template Specisifc Custom Javascript File -->
+<script src="/js/custom.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "/Api/Shop",
+            type: "Get",
+            data: {}
+        }).done(function (result) {
+            $('#CountShopCart').html(result);
+        });
+    });
+</script>
+
+
+
+    @RenderSection("Script", false)
+
+</body>
+
+</html>

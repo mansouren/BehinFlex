@@ -1,0 +1,200 @@
+﻿@using BehinFlex.Models
+@model IEnumerable<BehinFlex.Models.ShowShoppingCart>
+@{
+    //int shopId = ViewBag.ShopId;
+    //int? total = Session["Total"] as int?;
+    List<ShopCartItem> shoppingCart = new List<ShopCartItem>();
+    if (Session["ShoppingCart"] != null)
+    {
+        shoppingCart = Session["ShoppingCart"] as List<ShopCartItem>;
+    }
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <div>
+                        <h3>جزئیات پیش فاکتور شما</h3>
+                        <hr />
+                    </div>
+                    <div>
+                        <div class="row " style="overflow-x:auto;">
+                            <table class="table table-bordered table-hover table-striped col-md-11 text-center" id="shopcart">
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>تصویر</th>
+                                    <th>نام کالا و مشخصات فنی</th>
+                                    <th>سایز</th>
+                                    <th>قیمت</th>
+                                    <th>تعداد</th>
+                                    <th>تخفیف</th>
+                                    <th>جمع (ریال)</th>
+                                    <th>جمع با تخفیف (ریال)</th>
+                                    <th>عملیات</th>
+                                </tr>
+                                @{
+                                    int RowCount = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="row_@item.ProductId">
+                                        <td>@RowCount <input type="hidden" value="@item.ProductId" class="pID" name="productid" /></td>
+                                        <td><img src="/img/logo.png" width="100" /></td>
+                                        <td>
+                                            <a href="/Product/ShowProduct/@item.ProductId" target="_blank">
+                                                <b>@item.ProductTitle</b> <h6>@item.ProductDetails</h6>
+                                            </a>
+                                        </td>
+                                        <td>@item.Size</td>
+                                        @if (item.ProductPrice.HasValue)
+                                        {
+                                            <td data-value="@item.ProductPrice" class="productPrice" id="productPrice">@item.ProductPrice.Value.ToString("0,#")</td>
+                                        }
+                                        else
+                                        {
+                                            <td data-value="0" class="productPrice" id="productPrice">0</td>
+                                        }
+                                        <td>
+                                            @*<input type="number" min="0" class="count" value="@item.ProductCount" name="productcount" style="width: 70px;" />*@
+                                            <input type="number"
+                                                   value=@item.ProductCount
+                                                   min="0"
+                                                   class="count"
+                                                   id="count_@item.ProductId"
+                                                   name="count_@item.ProductId"
+                                                   style="width: 70px;"
+                                                   data-productid="@item.ProductId"
+                                                   data-productprice="@item.ProductPrice"
+                                                   data-productdiscount="@item.DiscountPercent" />
+                                        </td>
+
+                                        <td class="productDiscount" data-value="@item.DiscountPercent">
+                                            @item.DiscountPercent
+
+                                        </td>
+
+                                        <td id="summ" class="Sum" data-value="@item.Sum">
+                                            <span id="sum_@item.ProductId">@item.Sum.Value</span> ریال
+                                            @*@item.Sum.Value.ToString("0,#")*@
+                                        </td>
+
+
+                                        @*<td id="SummWithDiscount" class="SumWithDiscount">@item.SumWithDiscount.Value.ToString("0,#")</td>*@
+                                        <td>
+                                            <span id="sum_with_discount_@item.ProductId">@item.SumWithDiscount.Value</span> ریال
+
+                                        <td>
+                                            <button id="delete_@item.ProductId" data-productid="@item.ProductId" class="btn-danger"><i class="fas fa-trash fa-2x"></i></button>
+                                            
+                                        </td>
+                                    </tr>
+                                    RowCount++;
+                                }
+
+                                <tr>
+
+                                    <td colspan="7" class="text-left">جمع کل (ریال) : </td>
+                                    @if (Model.Sum(s => s.ProductPrice * s.ProductCount).HasValue)
+                                    {
+                                        <td id="TotalSum">
+                                            <span id="OrderTotal">
+
+                                                @(Model.Sum(s => s.ProductPrice * s.ProductCount).Value.ToString("0,#"))
+                                            </span>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td id="TotalSum">
+                                            0
+                                        </td>
+
+                                    }
+
+                                    <td class="TotalSumWithDiscount">
+                                        <span id="OrderGrandTotal">
+                                            @(Model.Sum(s => s.SumWithDiscount).Value.ToString("0,#"))
+                                        </span>
+                                    </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" class="text-left">مبلغ قابل پرداخت (ریال ) :</td>
+                                 
+                                    <td colspan="5" class="TotalSumWithDiscount">
+                                        <span id="OrderFinalPrice">
+                                            @Model.Sum(s => s.SumWithDiscount).Value.ToString("0,#")
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    @if (Session["DiscountCodeID"] != null)
+                                    {
+                                        <td colspan="7" class="text-left">مبلغ نهایی پس از اعمال کد تخفیف:</td>
+                                        <td colspan="3" id="test">
+                                            <span id="FinalPrice">
+                                                @(((int)Session["FinalPrice"]).ToString("#,0"))
+                                            </span> ریال
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td colspan="7" class="text-left"></td>
+                                        <td colspan="3" id="test">
+
+                                            <a class="btn-link" id="linkDiscount" onclick="ShowDiscount()" href="#">اگر کد تخفیفی دارید کلیک کنید</a>
+
+                                            <div id="discount" hidden="">
+                                                <input type="text" name="DiscountCode" id="DiscountCode" class="form-control" placeholder="کد تخفیف" required
+                                                       oninvalid="this.setCustomValidity('لطفا کد تخفیف را وارد کنید')"
+                                                       oninput="this.setCustomValidity('')" />
+                                                <button class="btn btn-info" id="ApplyDiscountCode">اعمال کد تخفیف</button>
+                                                
+                                            </div>
+
+                                        </td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <a class="btn btn-success btn-block" href="/ShoppingCart/Save" onclick="ClearLocalStorage()">تایید پیش فاکتور</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Script
+{
+    <script src="~/scripts/jQuery_3.5.1/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+        var applyDiscountCodeUrl = "@Url.Action("ApplyDiscountCode", "ShoppingCart")";
+        var recalculateDiscountCodeUrl = "@Url.Action("RecalculateDiscountCode", "ShoppingCart")";
+        $(document).ready(function() {
+
+        });
+
+        function ClearLocalStorage() {
+            localStorage.clear();
+        }
+
+        function preventBack() { window.history.forward(); }
+
+        setTimeout("preventBack()", 0);
+        window.onunload = function() { null };
+
+        function ShowDiscount() {
+            document.getElementById("linkDiscount").style.visibility = "hidden";
+            document.getElementById("discount").removeAttribute("hidden");
+        }
+    </script>
+    <script src="~/scripts/_ShoppingCartIndex.js" type="text/javascript"></script>
+
+
+}

@@ -1,0 +1,139 @@
+﻿@model BehinFlex.Models.RegisterViewModel
+@using CaptchaMvc.HtmlHelpers;
+@{
+    ViewBag.Title = "ثبت نام";
+    var captcha = Html.MathCaptcha("تصویر جدید", "", "عبارت در تصویر را وارد کنید", false);
+}
+<div class="row">
+    <div class="col-md-6 " dir="rtl">
+        <hr/>
+        <a class="btn-link" id="linkDiscount" onclick="ShowDiscount()" href="#"><strong> اگر کد معرفی دارید،کلیک کنید</strong></a>
+        <br/>
+        <div id="discount" hidden="">
+            <form method="post" action="/Account/SubmitRefCode">
+
+                <input type="text" name="refcode" class="form-control" placeholder="کد معرف" required
+                       oninvalid="this.setCustomValidity('لطفا کد معرفی را وارد کنید')"
+                       oninput="this.setCustomValidity('')"/>
+                <input type="submit" class="btn btn-info" style="margin-top: 7px" value="ثبت کد معرف"/>
+
+            </form>
+        </div>
+        <br/>
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success  text-center" id="alertRefcodeSuccess">@ViewBag.Success</div>
+        }
+        @if (ViewBag.Down != null)
+        {
+            <div class="alert alert-danger text-center" id="alertRefcodeDown">@ViewBag.Down</div>
+
+        }
+        <img src="~/img/InviteFriends.png" class="img-responsive"/>
+    </div>
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="col-md-6 ">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" dir="rtl">
+                    <h3 class="panel-title">
+                        عضویت
+                    </h3>
+                </div>
+                @Html.AntiForgeryToken()
+
+                <div class="panel-body" dir="rtl">
+                    <form accept-charset="UTF-8" role="form">
+
+                        <fieldset>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                                    <input type="text" name="FullName" id="FullName" class="form-control" placeholder="نام و نام خانودگی">
+                                </div>
+                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                                    <input type="text" name="UserName" id="UserName" class="form-control" placeholder="نام کاربری">
+                                </div>
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                                    <input type="password" name="Pass" id="Pass" class="form-control" placeholder="رمز ورود">
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Pass, "", new { @class = "text-danger" })
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
+                                    <input type="text" name="Email" id="Email" class="form-control" placeholder="ایمیل">
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                                    <input type="text" name="Phone" id="Phone" class="form-control" placeholder="موبایل (*********09)">
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <Span>تصویر امنیتی</Span>
+                                <br />
+                                @captcha
+                                @Html.ValidationMessage(captcha.BuildInfo.InputElementId, new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <input type="submit" value="ثبت نام" class="btn btn-lg btn-primary btn-block" />
+
+                            </div>
+                        </fieldset>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    
+
+
+    }
+
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section Script
+{
+    <script>
+    function ShowDiscount() {
+        document.getElementById("linkDiscount").style.visibility = "hidden";
+        document.getElementById("discount").removeAttribute("hidden");
+    }
+    </script>
+}

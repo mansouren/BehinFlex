@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BehinFlex.Models.Products>
+
+@{
+    ViewBag.Title = "محصولات";
+}
+
+<div class="row " style="height: 100%; " dir="rtl">
+    <!--main content-->
+    <!-- sidebar -->
+    <div class="col-md-3 sidebar visible-md-block visible-lg-block" dir="rtl">
+        <ul class="nav nav-stackedt ">
+            <li class="active">
+                <a href="#" class="first">
+                    محصولات
+                </a>
+            </li>
+            @foreach (var item in Model)
+            {
+                <li style="line-height:100%; ">
+                    <a href="/Product/ShowProduct/@item.ProductID">
+
+                        @item.ProductTitle
+                    </a>
+                </li>
+
+
+            }
+        </ul>
+    </div>
+    @*<div class="col-md-1"></div>*@
+    <div class="col-md-9">
+        <br />
+        @*<div class="page-header col-md-3">*@
+        <h2 style="font-family: 'Times New Roman';">محصولات</h2>
+        <hr />
+        @*</div>*@
+
+        <div class="row ">
+            <div>
+                <div id="snackbar" style="display: none;min-width: 250px;margin-left: -125px;background-color: gray;color: #fff;
+     text-align: center; border-radius: 10px;padding: 16px;position: fixed;z-index: 1; left: 50%; bottom: 400px;font-size: 15px;">
+                    پیش فاکتور به روزرسانی شد
+                </div>
+
+                <ul class="list-inline user-menu pull-left "
+                    style="position:fixed; z-index: 2; left: 175px; height:30px; border-radius: 4px;color: #fff; border:solid; border-color:#018990; background-color:lightblue">
+                    <li><i class="fa fa-credit-card text-primary"></i></li>
+                    <li>
+                        <div id="TotalSum" class="text-weight-strong" style="color:black"> جمع کل : <span id="OrderTotal">0</span> ریال</div>
+                    </li>
+                    <li><i class="fa fa-credit-card text-primary"></i></li>
+                    <li>
+                        <div id="TotalSumWithDiscount" class="text-weight-strong" style="color:black">  جمع کل با تخفیف : <span id="OrderGrandTotal">0</span> ریال</div>
+                    </li>
+                </ul>
+            </div>
+            <br />
+            <br />
+            @Html.Partial("_ProductsList_Homepage", Model)
+        </div>
+    </div>
+</div>
+@section Script
+{
+    <script src="~/scripts/jQuery_3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="~/scripts/_OrderFromShowProducts.js"></script>
+}

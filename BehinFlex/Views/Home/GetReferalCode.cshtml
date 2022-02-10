@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "GetReferalCode";
+}
+
+
+<div class="col-md-6 center-block">
+    <br />
+    <br />
+    <div class="alert alert-success" style="font-size: large">
+        <strong>چگونه امتیاز بگیرم؟</strong>
+        <br />
+        <p>شما می توانید با هر خرید ، ثبت نظر در مورد کالای خریداری شده ،و یا دعوت از دوستان ، در بهین فلکس امتیاز بگیرید و با استفاده از امتیاز ها از کد های تخفیف ویژه بهین فلکس بهره مند شوید.</p>
+    </div>
+
+    <br />
+    <h3>
+        <strong>دریافت کد معرفی</strong>
+    </h3>
+    <hr />
+    @*<form method="post" action="/Home/GetReferalCode">*@
+    @using (Html.BeginForm("GetReferalCode", "Home", FormMethod.Post))
+    {
+
+        <input type="text" id="refcode" name="refcode" class="form-control"   placeholder="کد معرفی" />
+
+        <br />
+        <input type="button" class="btn btn-warning" style="margin-top: 7px" value="دریافت کد معرفی"  />
+
+        @*</form>*@
+    }
+
+</div>
+<img src="~/img/InviteFriends.png" class="img-responsive col-md-6 " />
+
+@section Script
+{
+    <script>
+     
+  $(".btn").on("click",function(){
+    document.getElementById("refcode").value ='@(ViewBag.RefCode)';
+});
+    </script>
+    }

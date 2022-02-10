@@ -1,0 +1,82 @@
+﻿@using BehinFlex.Models
+@*@model IEnumerable<BehinFlex.Models.Images>*@
+@model  Tuple<IEnumerable<Images>, IEnumerable<Videos>>
+@{
+    ViewBag.Title = "گالری تصاویر";
+}
+
+        <div class="row" style="height:100%">
+            <!-- sidebar -->
+            <div class="col-md-3 sidebar visible-md-block visible-lg-block" dir="rtl">
+                <ul class="nav nav-stackedt">
+                    <li class="active">
+                        <a href="#Gallery" class="first">
+                            تصاویر
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#video">
+                            ویدئو ها
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-9" dir="rtl">
+                <div class="page-header">
+                    <h2 style="font-family:'Times New Roman'; color:#01747b;" id="Gallery">
+                        گالری تصاویر
+                        </h2>
+                </div>
+                <br />
+                @foreach (var item in Model.Item1)
+                {
+                    <div class="col-md-3 col-sm-4  thumbnail" style="margin-left: 20px;">
+
+                        <a class="vlightbox1" href="~/ImageGallery/Image/@item.ImageUrl" title="@item.ImageTitle">
+
+                            <img src="~/ImageGallery/Thumb/@item.ImageUrl" class="img-responsive img-rounded  " />
+                        </a>
+
+                        <div class="caption text-center">@item.ImageTitle</div>
+
+                    </div>
+
+
+
+
+                }
+                <hr style="clear: both" />
+                <div class="page-header">
+                    <h2 style="font-family:'Times New Roman'; color:#01747b;" id="video">
+                        ویدئوها
+
+                    </h2><br />
+                </div>
+            
+            <br />
+            @foreach (var item in Model.Item2)
+            {
+                <div class="col-sm-5 col-md-4">
+                    <video alt="Videos" class="thumbnail" width="260" height="180" controls>
+                        <source src="~/Videos/galleryvideos/@item.VideoUrl" type="video/mp4"> 
+                        <source src="~/Videos/galleryvideos/@item.VideoUrl" type="video/ogg">
+                    </video>
+                </div>
+            }
+            </div>
+         
+            
+            @section Script
+            {  
+                <!-- Start VisualLightBox.com HEAD section -->
+                <link rel="stylesheet" href="/engine/css/vlightbox1.css" type="text/css" />
+                <link rel="stylesheet" href="/engine/css/visuallightbox.css" type="text/css" media="screen" />
+
+                <script src="/engine/js/visuallightbox.js" type="text/javascript"></script>
+                <!-- End VisualLightBox.com HEAD section -->
+                <script src="/engine/js/vlbdata1.js" type="text/javascript"></script>
+            }
+        </div>
+
+

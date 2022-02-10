@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Transport";
+}
+
+<div id="content">
+    <div class="container" id="about" dir="rtl">
+        <div class="row">
+            <!-- sidebar -->
+            <div class="col-md-3  sidebar visible-md-block visible-lg-block">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="/Home/ShowAllProducts">
+                            مشاهده پیش فاکتور
+                            <small>آنلاین خرید کنید </small>
+                        </a>
+                    </li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="/Home/GetReferalCode">
+                                باشگاه مشتریان
+                                <small>به دوستان ما بپیوندید</small>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Account/Register">
+                                باشگاه مشتریان
+                                <small>به دوستان ما بپیوندید</small>
+                            </a>
+                        }
+
+                    </li>
+                    <li>
+                        <a href="/Home/MapRequest" class="first">
+                            درخواست نقشه کشی
+                            <small>نقشه تاسیسات خود را به ما بسپارید</small>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/Home/Transport">
+                            نحوه ارسال کالا
+                            <small></small>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--main content-->
+            <div class="col-md-9 " dir="rtl" style="height:662px;">
+                <div class="page-header">
+                    <h2 style="font-family:'Times New Roman'">
+                        نحوه ارسال کالا
+                        <small>با دقت تمام کالای شما را ارسال خواهیم نمود .</small>
+
+                </div>
+
+
+                <div class="col-md-7 " dir="rtl" align="justify">
+                    <br />
+                    <br />
+                    <b> شیوه ارسال برای مشتری به دو صورت تعریف شده است .</b> <br /><br />
+                    سفارش های شما به دو صورت کلی <br />
+                    1- کم هزینه با زمان طولانی تر <br />
+                    2- روش ارسال سریع<br /><br />
+                    برخی از کالاهای شما که امکان حمل آن با استفاده از موتور یا وسایل نقلیه را دارا باشد این امکان را میدهد که در کوتاه ترین
+                    زمان به دست مشتری رسیده و برای برخی از کالاها که حجم آنها زیاد بوده
+                    از مینی خاور ، خاور و یا کامیونت استفاده شده که بهین فلکس با همکاری چندین باربری در سطح شهر  کالای مورد نیاز شما را در کوتاه ترین زمان به دست شما میرساند .
+                    <br />
+                    <br />
+                </div>
+                <div class="col-md-5 " >
+                    <img src="/img/slides/4.gif " class="img-responsive" >
+
+                </div>
+                @*<div class="col-md-5 " >
+                    <br /><br /><img src="/img/slides/3.gif " />
+                </div>*@
+            </div>
+
+        </div>
+    </div>
+</div>
+

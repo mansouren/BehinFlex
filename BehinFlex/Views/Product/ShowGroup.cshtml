@@ -1,0 +1,104 @@
+﻿@using BehinFlex.Models
+@model IEnumerable<ProductBrand>
+
+    
+@if (Request.Browser.Browser == "Firefox")
+{
+    <ul class="dropdown-menu">
+        
+        @foreach (ProductBrand brand in Model)
+        {
+            <li class="dropdown-submenu">
+                <a href="/Product/ShowProductByBrandMenu/@brand.ProductBrandID"><span class="glyphicon glyphicon-asterisk"></span>@brand.ProductBrandTitle <i class="caret"></i></a>
+                <ul class="dropdown-menu">
+                
+                    @foreach (ProductGroup group in brand.ProductGroup)
+                    {
+                        <li class="dropdown-submenu">
+                            <a href="/Product/ShowProductByheadGroupMenu/@group.ProductGroupID"><span class="glyphicon glyphicon-asterisk"></span> @group.ProductGroupTitle <i class="caret"></i></a>
+                            <ul class="dropdown-menu">
+                                @foreach (ProductSubGroup subgroup in group.ProductSubGroup)
+                                {
+                                    <li class="dropdown-submenu">
+                                        @if(subgroup.Products.Any())
+                                        { 
+                                            <a href="/Product/ShowProductByGroupMenu/@subgroup.ProductSubGroupID"><span class="glyphicon glyphicon-asterisk"></span> @subgroup.ProductSubGroupTitle <i class="caret"></i></a>
+
+                                        }
+                                        else
+                                        {
+                                            <a href="#"><span class="glyphicon glyphicon-asterisk"></span> @subgroup.ProductSubGroupTitle <i class="caret"></i></a>
+                                        }
+                                        <ul class="dropdown-menu">
+                                            @foreach (Products product in subgroup.Products)
+                                            {
+                                                <li><a href="@Url.Action("ShowProduct", "Product", new { id = product.ProductID }, null)"><span class="glyphicon glyphicon-asterisk"></span>@product.ProductTitle</a></li>
+                                                @*<li style="list-style-type:circle">@Html.ActionLink(product.ProductTitle, "ShowProduct", "Product", new { id = product.ProductID }, null)</li>*@
+
+                                            }
+
+                                        </ul>
+                                    </li>  
+                                }
+                                
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </li> 
+        }
+       
+    </ul>
+
+
+}
+
+else
+{
+   
+    <ul class="dropdown-menu">
+        
+        @foreach (ProductBrand brand in Model)
+        {
+            <li class="dropdown-submenu">
+                <a href="/Product/ShowProductByBrandMenu/@brand.ProductBrandID"><span class="glyphicon glyphicon-asterisk"></span>@brand.ProductBrandTitle <i class="caret" style="position: relative; top:17px;"></i></a>
+                <ul class="dropdown-menu">
+                
+                    @foreach (ProductGroup group in brand.ProductGroup)
+                    {
+                        <li class="dropdown-submenu">
+                            <a href="/Product/ShowProductByheadGroupMenu/@group.ProductGroupID"><span class="glyphicon glyphicon-asterisk"></span> @group.ProductGroupTitle <i class="caret" style="position: relative; top:17px;"></i></a>
+                            <ul class="dropdown-menu">
+                                @foreach (ProductSubGroup subgroup in group.ProductSubGroup)
+                                {
+                                    <li class="dropdown-submenu">
+                                        @if(subgroup.Products.Any())
+                                        { 
+                                            <a href="/Product/ShowProductByGroupMenu/@subgroup.ProductSubGroupID"><span class="glyphicon glyphicon-asterisk"></span> @subgroup.ProductSubGroupTitle <i class="caret" style="position: relative; top:17px;"></i></a>
+
+                                        }
+                                        else
+                                        {
+                                            <a href="#"><span class="glyphicon glyphicon-asterisk"></span> @subgroup.ProductSubGroupTitle <i class="caret" style="position: relative; top:17px;"></i></a>
+                                        }
+                                        <ul class="dropdown-menu">
+                                            @foreach (Products product in subgroup.Products)
+                                            {
+
+                                                <li>@Html.ActionLink(product.ProductTitle, "ShowProduct", "Product", new {id = product.ProductID}, null)</li>
+
+                                            }
+
+                                        </ul>
+                                    </li> 
+                                }
+                                
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </li> 
+        }
+       
+    </ul>
+}

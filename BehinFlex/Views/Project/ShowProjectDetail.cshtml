@@ -1,0 +1,29 @@
+﻿@model BehinFlex.Models.Projects
+
+@{
+    ViewBag.Title = "جزئیات پروژه";
+}
+
+<div class="page-header">
+    <h2 style="font-family:'Times New Roman'; color:#01747b;">
+        جزئیات پروژه
+    </h2>
+    </div>
+    <div class="thumbnail ">
+    <div class="well well-sm text-right" style="overflow: hidden; color:#348589;">
+        <b>  @Model.ProjectTitle</b>
+    </div>
+
+    <img class="thumbnail pull-left" src="/ProjectImages/Image/@Model.ProjectImageUrl" width="220" />
+
+    <div class="pull-right">
+        @Html.Raw(Model.ProjectDescription)
+    </div>
+    <hr style="clear:both" />
+    <div dir="ltr">
+        @Model.CreateDate.ToString("yyyy/MM/dd")
+    </div>
+</div>
+<div dir="ltr">
+    @Html.ActionLink("بازگشت به فهرست ", "ShowProjects", "Project")
+</div>

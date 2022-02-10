@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BehinFlex.Models.Orders>
+
+@{
+    ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+    <hr />
+    @(Html.Kendo().Grid(Model)
+.Name("Grid")
+.Columns(columns =>
+{
+
+
+
+columns.Bound(model => model.OrderId).Width(90)/*.HtmlAttributes(new { Tooltip = "شماره پیش فاکتور" })*/;
+columns.Bound(model => model.Users.UserName).Width(80);
+columns.Bound(model => model.OrderDate).Width(80);
+columns.Bound(model => model.IsFinally).Width(80);
+columns.Bound(model => model.OrderTotalSum).Width(80);
+columns.Bound(model => model.OrderTotalSumWithDiscount).Width(100);
+columns.Bound(model => model.DiscountCodes.DiscountCode).Width(100);
+columns.Bound(model => model.OrderTotalAfterDiscountCodeApply).Width(160);
+
+columns.Bound(model => model.Bonuses.FirstOrDefault(b => b.OrderId == model.OrderId).Bonus).Width(80);
+columns.Bound(item => @item.OrderId).Title("دستورات").Filterable(false).Groupable(false)
+      .Template(@<text>
+
+        @Html.ActionLink("ویرایش", "Edit", new { id = @item.OrderId }, new { @class = "k-button k-button-icontext k-grid-Edit" })
+        @Html.ActionLink("حذف", "Delete", new { id = @item.OrderId }, new { @class = "k-button k-button-icontext k-grid-Delete" })
+        @Html.ActionLink("جزئیات", "Details", "OrderDetails", new { id = @item.OrderId }, new { @class = "k-button k-button-icontext k-grid-Delete" })
+
+    </text>).Width(230);
+})
+
+.Groupable()
+.Pageable()
+.Sortable()
+.Scrollable(scrollable => scrollable.Height("auto"))
+.Filterable()
+
+.DataSource(dataSource => dataSource
+.Server()
+.PageSize(15)
+.Model(model => model.Id(item => item.OrderId))
+)
+    )
+
+</div>
+

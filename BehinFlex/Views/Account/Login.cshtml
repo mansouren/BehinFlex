@@ -1,0 +1,74 @@
+﻿@model BehinFlex.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "ورود";
+}
+@*<div class="fullscreen-centered page-login">
+    <div id="background-wrapper" class="benches" data-stellar-background-ratio="0.8">*@
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="header">
+                <div class="header-inner">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-sm-offset-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" dir="rtl">
+                            <h3 class="panel-title">
+                                ورود کاربران
+                            </h3>
+                        </div>
+
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="panel-body">
+                            <form accept-charset="UTF-8" role="form">
+                                <br />
+                                <fieldset>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        <div class="input-group input-group-lg" dir="rtl">
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
+                                            <input type="text" name="UserName" id="UserName" class="form-control" placeholder="نام کاربری">
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group input-group-lg" dir="rtl">
+                                            <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                                            <input type="password" name="Password" id="Password" class="form-control" placeholder="رمز ورود">
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="checkbox" dir="rtl">
+                                        @*<label>
+                                            @Html.EditorFor(model => model.Remember)
+                                            &nbsp; &nbsp; مرا به خاطر بسپار
+                                            @Html.ValidationMessageFor(model => model.Remember, "", new { @class = "text-danger" })
+                                        </label>*@
+                                    </div>
+
+
+
+                                    <div class="form-group">
+
+                                        <input type="submit" value="ورود" class="btn btn-lg btn-primary btn-block" />
+
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <p class="m-b-0 m-t" align="right"> تا به حال عضو نشده اید؟ <a href="/Account/Register"> عضو شوید</a></p>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        }
+    @*</div>
+</div>*@

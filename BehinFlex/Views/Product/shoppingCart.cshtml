@@ -1,0 +1,94 @@
+﻿
+    
+@model BehinFlex.Models.ShowShoppingCart
+    @Html.AntiForgeryToken()
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model=>model.ProductId,new { htmlAttributes =new {@id="ProductID"}})
+
+    <td>
+        @Html.EditorFor(model => model.ProductCount, new { htmlAttributes = new { onchange = "AddToBasket(model=>model.ProductId)", @class = "form-control ",@id="Count" } })
+        @*<input type="number" min="0" value="@item.ProductCount" onchange="AddToBasket(@item.ProductId)" />*@
+        @Html.ValidationMessageFor(model => model.ProductCount, "", new { @class = "text-danger" })
+    </td>
+    <td>
+
+        @Html.DisplayFor(model => model.Sum, new { htmlAttributes = new { @class = "form-control",@id="Sum" } })
+        @Html.ValidationMessageFor(model => model.Sum, "", new { @class = "text-danger" })
+    </td>
+
+    <td>
+
+        @Html.DisplayFor(model => model.SumWithDiscount, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.SumWithDiscount, "", new { @class = "text-danger" })
+    </td>
+
+        @*<td>
+
+            @Html.DisplayFor(model => model.TotalSum, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TotalSum, "", new { @class = "text-danger" })
+        </td>
+        <td>
+
+            @Html.DisplayFor(model => model.TotalsumWithDiscount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TotalsumWithDiscount, "", new { @class = "text-danger" })
+        </td>*@
+
+
+
+
+
+@section Script
+{
+    
+    <script>
+    
+        @*function OnChangeEvent() {
+            var productId = $('#ProductID').val();
+            //alert(fakulteId);
+            $.ajax({
+                url: '/Product/shoppingCart?id=' + productId,
+                type: "POST",
+                
+                data: { Text: $('#Count').val() },
+                success: function (bolumler) {
+                    $("#Sum").val();
+                    $.each(bolumler, function (i, group) {
+                        $("#rdbGroup").append(
+                            $('<option></option>').val(group.ProductGroupID).html(group.ProductGroupTitle));
+                    });
+                }
+            });
+        }
+        function OnChangeEvent() {
+            $.ajax({
+                url: '@Url.Action("shopp", "Controller")',
+                type: 'post',
+                data: {
+                    Text: $('#TextField').val()
+                },
+                success: function (_result) {
+                    $('#TaskDesc').val(_result.foo);
+                }
+            });
+        };*@
+        function AddToBasket(id) {
+            $(document).ready(function () {
+                $.ajax({
+                    url: "/Api/Shop",
+                    type: "Get",
+                    data: { productid: id }
+
+                }).done(function (result) {
+                    $('#CountShopCart').html(result);
+
+                });
+
+
+
+            });
+        }
+    </script>
+
+}

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BehinFlex.Models.Products>
+
+@foreach (var item in Model)
+{
+    <div class="item">
+        <a href="#" class="overlay-wrapper">
+            <img src="/ProductImages/Image/@item.ProductImageUrl" alt="ISOROLLS" class="img-responsive underlay" style="width:250px; height: 175px;">
+            <span class="overlay">
+                <span class="overlay-content"> <span class="h4">@item.ProductEnTitle </span> </span>
+                @*@if (item.Discounts.Any())
+                {
+                    <span class="overlay-content">
+                        <span>تخفیف:</span><span>%</span> @item.Discounts.FirstOrDefault().DiscountPercent.ToString("D")
+                    </span>
+                }*@
+            </span>
+        </a>
+
+        <div class="item-details bg-noise">
+            <h4 class="item-title">
+                <a href="#">@item.ProductTitle</a>
+                @if (item.Discounts.Any())
+                {
+            <div class="pull-left " style="color:red"> <span>تخفیف:</span><span>%</span> @item.Discounts.FirstOrDefault().DiscountPercent.ToString("D")</div>
+                }
+            </h4>
+            <a href="/Product/ShowProduct/@item.ProductID" class="btn btn-more i-right">اطلاعات بیشتر<i class="fa fa-plus"></i></a>
+        </div>
+    </div>
+
+}
+
+
+

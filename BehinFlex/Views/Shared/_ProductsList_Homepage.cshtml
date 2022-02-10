@@ -1,0 +1,107 @@
+﻿@using BehinFlex.Models
+@model IEnumerable<BehinFlex.Models.Products>
+@{
+    int rowCounter = 0;
+    List<ShopCartItem> shoppingCart = new List<ShopCartItem>();
+    if (Session["ShoppingCart"] != null)
+    {
+        shoppingCart = Session["ShoppingCart"] as List<ShopCartItem>;
+    }
+}
+<div class="font-size-13">
+    <div class="hidden-xs hidden-sm text-center margins-fix row">
+        <div class="col-md-1 bg-info products_list_header">ردیف</div>
+        <div class="col-md-2 bg-info products_list_header">تصویر</div>
+        <div class="col-md-2 bg-info products_list_header">نام کالا و مشخصات فنی</div>
+        <div class="col-md-1 bg-info products_list_header">سایز</div>
+        <div class="col-md-1 bg-info products_list_header">قیمت</div>
+        <div class="col-md-1 bg-info products_list_header">تخفیف</div>
+        <div class="col-md-1 bg-info products_list_header">تعداد</div>
+        <div class="col-md-1 bg-info products_list_header">جمع</div>
+        <div class="col-md-2 bg-info products_list_header">جمع با تخفیف</div>
+    </div>
+    @foreach (var itemx in Model)
+    {
+        ++rowCounter;
+        <div class="row product_item margins-fix">
+            <div class="col-md-1 text-center hidden-xs product_data_item">@rowCounter</div>
+            <div class="col-md-2 text-center product_data_item">
+                <img src="~/ProductImages/Thumb/@itemx.ProductImageUrl" width="100" />
+            </div>
+            <div class="col-md-2 product_data_item">
+                <div class="row">
+                    <div class="col-md-12 col-xs-4 visible-xs visible-sm hidden-md padding-2">نام کالا:</div>
+                    <div class="col-md-12 col-xs-8 padding-2">
+                        <a target="_blank" href="~/Product/ShowProduct/@itemx.ProductID">@itemx.ProductTitle</a>
+                    </div>
+                    <div class="col-md-12 col-xs-12 padding-2">@itemx.ProductDetails</div>
+                </div>
+            </div>
+            <div class="col-md-1 product_data_item">
+                <div class="row">
+                    <div class="col-md-12 col-xs-4 visible-xs  visible-sm hidden-md padding-2">سایز:</div>
+                    <div class="col-md-12 col-xs-8">@itemx.Size</div>
+                </div>
+            </div>
+            <div class="col-md-1 product_data_item">
+                <div class="row">
+                    <div class="col-md-12 col-xs-4 visible-xs visible-sm hidden-md padding-2">قیمت:</div>
+                    <div class="col-md-12 col-xs-8 padding-2">
+                        <span>@itemx.ProductPrice.ToString("#,0 ریال")</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 product_data_item">
+                <div class="row">
+                    <div class="col-md-12 col-xs-4 visible-xs visible-sm hidden-md padding-2">تخفیف:</div>
+                    <div class="col-md-12 col-xs-8 padding-2">
+                        @if (itemx.Discounts.Any(d => d.ProductID == itemx.ProductID))
+                        {
+                            <span>%</span>@itemx.Discounts.First(d => d.ProductID == itemx.ProductID).DiscountPercent
+                        }
+                        else
+                        {
+                            <text>0</text>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 product_data_item">
+                <div class="row">
+                    <div class="col-md-12 col-xs-4 visible-xs visible-sm hidden-md padding-2">تعداد:</div>
+                    <div class="col-md-12 col-xs-8 padding-2">
+                        @{
+                            var shoppingCartItem = shoppingCart.FirstOrDefault(sc => sc.ProductId == itemx.ProductID);
+                            var productCount = shoppingCartItem?.ProductCount ?? 0;
+                            var productDiscountPercent = itemx.Discounts.FirstOrDefault(d => d.ProductID == itemx.ProductID)?.DiscountPercent ?? 0;
+                            var currentRowSum = productCount * itemx.ProductPrice;
+                            var currentRowSumWithDiscount = (productCount * itemx.ProductPrice) - ((productCount * itemx.ProductPrice) * productDiscountPercent) / 100;
+                        }
+                        <input type="number" 
+                               value = @productCount
+                               min="0"
+                               class="count"
+                               id="count_@itemx.ProductID"
+                               name="count_@itemx.ProductID"
+                               style="width: 75%;"
+                               data-productid="@itemx.ProductID"
+                               data-productprice="@(itemx.ProductPrice)"
+                               data-productdiscount="@productDiscountPercent"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 product_data_item">
+                <div class="row">
+                    <div class="col-md-12 col-xs-4 visible-xs  visible-sm hidden-md padding-2">جمع :</div>
+                    <div class="col-md-12 col-xs-8 padding-2"><span id="sum_@itemx.ProductID">@currentRowSum</span> ریال</div>
+                </div>
+            </div>
+            <div class="col-md-1 product_data_item">
+                <div class="row">
+                    <div class="col-md-12 col-xs-4 visible-xs  visible-sm hidden-md padding-2">جمع با تخفیف:</div>
+                    <div class="col-md-12 col-xs-8 padding-2"><span id="sum_with_discount_@itemx.ProductID">@currentRowSumWithDiscount</span> ریال</div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BehinFlex.Models.Comments>
+
+
+<h3 class="block-title" dir="rtl">
+    نظرات کاربران
+</h3>
+@foreach(var item in Model)
+{ 
+    
+    <div class="col-md-4" dir="rtl">
+        <div class="panel panel-default panel-pricing text-center">
+            <div class="panel-heading">
+                <h4 class="panel-title"><font color="#01747b">@item.Products.ProductTitle</font></h4>
+            </div>
+            <div class="panel-pricing-price text-center">
+                <h4 class="panel-title">
+                    
+                    <em>@item.Users.UserName</em>
+
+                </h4></div>
+            <div class="panel-body text-right">
+                @if (item.CommentText.Length < 200)
+                {
+                    <p> @item.CommentText </p>
+                }
+                else
+                {
+                    <p> @item.CommentText.Substring(0, 200) ... </p>
+                }
+                <br/>
+                <div align="left"><a href="/Product/ShowProduct/@item.ProductID" class="btn btn-primary btn-sm">مشاهده نظرات</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+   
+}
+

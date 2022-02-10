@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BehinFlex.Models.Products>
+
+
+@{
+    ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+
+              columns.Bound(item => @item.ProductImageUrl).Title("تصویر").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                            <img class="thumbnail" src="~/ProductImages/Thumb/@item.ProductImageUrl" />
+                </text>).Width("200px");
+
+columns.Bound(model => model.ProductTitle).HtmlAttributes(new { title = "عنوان محصول" });
+
+columns.Bound(model => model.ProductSubGroup.ProductGroup.ProductBrand.ProductBrandTitle).HtmlAttributes(new { title = "برند محصول" });
+columns.Bound(model => model.ProductSubGroup.ProductGroup.ProductGroupTitle).HtmlAttributes(new { title = "گروه محصول" });
+columns.Bound(model => model.ProductSubGroup.ProductSubGroupTitle).HtmlAttributes(new { title = "زیرگروه محصول" });
+columns.Bound(model => model.ProductPrice);
+columns.Bound(model => model.Discounts.FirstOrDefault(d => d.ProductID == model.ProductID).DiscountPercent);
+columns.Bound(item => @item.ProductID).Title("دستورات").Filterable(false).Groupable(false)
+.Template(@<text>
+                    @Html.ActionLink("ویرایش", "Edit", new { id = @item.ProductID }, new { @class = "k-button k-button-icontext k-grid-Edit" })
+                    @Html.ActionLink("حذف", "Delete", new { id = @item.ProductID }, new { @class = "k-button k-button-icontext k-grid-Delete" })
+</text>).Width(200);
+})
+.ToolBar(toolbar =>
+{
+toolbar.Custom().Action("Create", "Products").Text("افزودن");
+}
+)
+.Groupable()
+.Pageable()
+.Sortable()
+.Scrollable(scrollable => scrollable.Height("auto"))
+.Filterable()
+.DataSource(dataSource => dataSource
+.Server()
+.PageSize(10)
+.Model(model => model.Id(item => item.ProductID))
+)
+    )
+
+</div>
+@section Script {
+
+}

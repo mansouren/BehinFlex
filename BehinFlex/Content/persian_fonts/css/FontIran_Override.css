@@ -1,0 +1,17 @@
+﻿.k-editable-area .k-content, .k-raw-content {
+    font-family: "IranSans" !important;
+}
+
+label, input, select, input:after {
+    font-family: "IranSans";
+}
+
+.k-rtl {
+    font-family: "IranSans";
+}
+
+* {
+    font-family: "IranSans";
+}
+
+

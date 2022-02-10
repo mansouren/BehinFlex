@@ -1,0 +1,80 @@
+﻿@model BehinFlex.Models.DiscountCodes
+
+@{
+    ViewBag.Title = "حذف کد تخفیف";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>آیا از حذف این کد تخفیف اطمینان دارید؟</h3>
+
+<div>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-warning ">
+            @ViewBag.Message
+        </div>
+    }
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountCodeTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountCodeTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountCodeExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountCodeExpireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountPercent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountPercent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountMaxAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountMaxAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountCodeUsageCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountCodeUsageCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.UserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="تایید حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("بازگشت به فهرست", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

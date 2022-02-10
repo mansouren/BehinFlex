@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BehinFlex.Models.Images>
+@{
+    ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+
+              columns.Bound(item => @item.ImageUrl).Title("تصویر").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                <img class="thumbnail" src="~/ImageGallery/Thumb/@item.ImageUrl" />
+                </text>);
+
+
+      columns.Bound(model => model.ImageTitle);
+      columns.Bound(model => model.CreateDate);
+      columns.Bound(item => @item.ImageID).Title("دستورات").Filterable(false).Groupable(false)
+              .Template(@<text>
+                @Html.ActionLink("ویرایش", "Edit", new { id = @item.ImageID }, new { @class = "k-button k-button-icontext k-grid-Edit" })
+                @Html.ActionLink("حذف", "Delete", new { id = @item.ImageID }, new { @class = "k-button k-button-icontext k-grid-Delete" })
+            </text>).Width(200);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Custom().Action("Create", "Images").Text("افزودن");
+          }
+          )
+          .Groupable()
+          .Pageable()
+          .Sortable()
+          .Scrollable(scrollable => scrollable.Height("auto"))
+          .Filterable()
+          .DataSource(dataSource => dataSource
+              .Server()
+              .PageSize(5)
+              .Model(model => model.Id(item => item.ImageID))
+          )
+    )
+
+</div>
+
+ 
+

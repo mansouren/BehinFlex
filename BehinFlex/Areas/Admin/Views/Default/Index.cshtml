@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "صفحه اصلی";
+}
+
+<h2>بخش مدیریت وب سایت</h2>
+<hr/>
+<div class="col-md-4 col-sm-6">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@Html.ActionLink("بخش کدهای تخفیف", "Index", "DiscountCodes")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت کاربران", "Index", "Users")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت برند محصولات", "Index", "ProductBrands")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت گروه محصولات", "Index", "ProductGroups")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت زیرگروه محصولات  ", "Index", "ProductSubGroups")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت محصولات", "Index", "Products")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت اخبار", "Index", "News")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت پروژه ها", "Index", "Projects")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت شرکت کنندگان سمینارها", "Index", "Seminarparticipants")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت نظرها", "Index", "Comments")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت گالری تصاویر", "Index", "Images")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت ویدئوها", "Index", "Videos")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت پستهای سازمانی", "Index", "OrganizationCharts")</li>
+        <li class="list-group-item">@Html.ActionLink("بخش مدیریت سفارشات", "Index", "Orders")</li>
+        
+        @*<li class="list-group-item">@Html.ActionLink("بخش مدیریت تخفیف ها برای محصولات", "ProductDiscountIndex", "Discounts")</li>*@
+    </ul>
+</div>
+<div class="col-md-8">
+    <img src="~/img/Mangement.jpg" class="pull-left img-responsive" alt="مدیریت"/>
+</div>

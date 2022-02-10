@@ -1,0 +1,700 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Behin Flex Company</title>
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Facebook Opengraph integration: https://developers.facebook.com/docs/sharing/opengraph -->
+    <meta property="og:title" content="">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+
+    <!-- Twitter Cards integration: https://dev.twitter.com/cards/  -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/img/icons/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/icons/114x114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/icons/72x72.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/icons/default.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href="/Content/bootstrap-rtl.css" rel="stylesheet" />
+
+
+
+    <!-- Libraries CSS Files -->
+    <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/lib/owlcarousel/owl.theme.min.css" rel="stylesheet">
+    <link href="/lib/owlcarousel/owl.transitions.min.css" rel="stylesheet">
+    <link href="/lib/owlcarousel/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/lib/owlcarousel/owl.theme.default.min.css" rel="stylesheet" />
+    <!-- Main Stylesheet File -->
+
+    <link href="/css/mrbs.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="~/Content/persian_fonts/css/IranSans.css" rel="stylesheet" />
+    <link href="~/Content/persian_fonts/css/FontIran_Override.css" rel="stylesheet" />
+
+
+    <script>
+        function myMap() {
+            var mapCanvas = document.getElementById("map");
+            var mapOptions = {
+                center: new google.maps.LatLng(35.7325759, 51.4171056), zoom: 15
+            };
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(35.7325759, 51.4171056),
+                map: map,
+                animation: google.maps.Animation.BOUNCE
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVYbXKo90zP625DZLsWBwiU2cqWeu1ZrQ&callback=myMap"></script>
+    <style type="text/css">
+    .owl-carousel .owl-wrapper-outer {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        nav-right:initial;
+        z-index: 1; /* added this */
+    }
+
+    .owl-item {
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+    }
+
+    </style>
+
+</head>
+
+
+<!-- ======== Region: body ======== -->
+
+
+<body class="page-about" onload="myMap()">
+
+    <div id="background-wrapper" class="buildings" data-stellar-background-ratio="0.1">
+
+        <!-- ======== Region: #navigation ======== -->
+        <div id="navigation" class="wrapper">
+            <!--Hidden Header Region-->
+            <div class="header-hidden collapse">
+                <div class="header-hidden-inner container">
+                    <div class="row">
+                        <div class="col-md-3  hidden-sm  hidden-xs" dir="rtl">
+                            <!--todo: replace with company contact details-->
+                            <h3>
+                                تماس با ما
+                            </h3>
+                            <address>
+                                <strong>شرکت بهین فلکس</strong><br />
+                                <abbr title="Address"><i class="fa fa-pushpin"></i></abbr>
+                                تهران، خیابان بخارست، کوچه دهم، پلاک 25، طبقه دوم، واحد 4
+                                <br>
+                                <i class="fa fa-phone"></i>
+                                88944188-9
+                                <br>
+                                <i class="fa fa-envelope-o"></i> info@behinflex.com
+                            </address>
+                        </div>
+
+
+                        <div class="col-md-3 col-sm-4 hidden-xs" dir="rtl">
+                            <h3>
+                                گواهینامه فنی
+                            </h3>
+                            <p><font color="#2b565c">مرکز تحقیقات راه ، مسکن و شهر سازی </font></p>
+                        </div>
+                        <div class="col-md-3 col-sm-4 hidden-xs">
+                            <img src="/img/slides/slide.png" width="320" height="210" />
+                        </div>
+
+                        <div class="col-md-3 col-sm-4" dir="rtl">
+                            <h4 class="text-uppercase">
+                                &nbsp; ما را دنبال کنید در :
+                            </h4>
+                            <!--social media icons-->
+                            <div class="social-media social-media-stacked" dir="rtl">
+
+                                <a href="https://www.instagram.com/behinflex.co/"><i class="fa fa-instagram fa-fw"></i><font color="#306168">&nbsp; Instagram </font></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Header & navbar-branding region-->
+            <div class="header">
+                <div class="header-inner container">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-7 col-xs-6" align="right">
+                            <div class="navbar-slogan bottom" align="right">
+                                تضمین ما
+                                <br> حرکت به سمت آینده ای روشن
+                            </div>
+                            <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
+                            <a class="navbar-brand" href="/Home/Index" title="Home">
+                                <h1 class="hidden" align="right"><img src="/img/logo.png" alt="Behin Flex">Behin Flex</h1>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2 col-sm-0 col-xs-0"></div>
+
+                        <div class="col-md-5 col-sm-5 col-xs-6 pull-left" align="left">
+                            <ul class="list-inline user-menu pull-left"><li class="user-button"><a class="btn btn-primary btn-hh-trigger" role="button" data-toggle="collapse" data-target=".header-hidden">باز شدن</a></li></ul>
+                            <ul class="list-inline user-menu pull-left">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li class="user-login"><a href="/Account/Signout" class="text-uppercase"><strong>خروج </strong></a><i class="fa fa-sign-out text-primary"></i></li>
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        <li class="user-register"><a href="/Admin/Default/Index" class="text-uppercase"><strong> بخش مدیریت </strong></a><i class="fa fa-edit text-primary "></i></li>
+                                    }
+                                    <li class="user-register"><strong>@User.Identity.Name</strong> <i class="fa fa-info text-primary"></i></li>
+
+                                }
+
+                                else
+                                {
+                                    <li class="user-login"><a href="/Account/Login" class="text-uppercase"><strong>ورود </strong></a><i class="fa fa-sign-in text-primary"></i></li>
+                                    <li class="user-register"><a href="/Account/Register" class="text-uppercase"><strong>عضویت </strong></a><i class="fa fa-edit text-primary"></i></li>
+                                    <li class="user-register"><strong>کاربر مهمان  </strong><i class="fa fa-info text-primary"></i></li>
+
+                                }
+                                <li class="shopping-basket"><a href="/ShoppingCart/Index" id="CountShopCart" class="text-uppercase" ><strong> مشاهده پیش فاکتور </strong></a><i class="fa fa-credit-card-alt text-primary"></i></li>
+                            </ul>
+
+                        </div>
+                        <!--header rightside-->
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row" id="infoSysMainMenu">
+                    <nav class="navbar navbar-inverse" role="navigation">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class="active"><a href="/Home/Index"><span class="glyphicon glyphicon-home"></span></a></li>
+                                    <li class="active"><a href="/Newss/ShowNews">اخبار</a></li>
+                                    <li class="mrbs dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"> محصولات <b class="caret"></b></a>
+                                        @Html.Action("ShowGroup", "Product")
+                                    </li>
+
+                                    <li class="mrbs dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="/Home/About"> بهین فلکس <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/Home/About"><span class="glyphicon glyphicon-asterisk"></span> درباره ما </a></li>
+                                            <li><a href="/Home/ContactUs"><span class="glyphicon glyphicon-asterisk"></span> تماس با ما </a></li>
+                                            <li><a href="/OrganizationChart/AboutPost"><span class="glyphicon glyphicon-asterisk"></span> ساختار سازمانی </a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown" dir="rtl">
+                                        <a href="" class="dropdown-toggle" data-toggle="dropdown">خدمات ویژه <b class="caret"></b></a>
+                                        <!-- Dropdown Menu -->
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/Home/ShowAllProducts"><span class="glyphicon glyphicon-asterisk"></span>  ثبت پیش فاکتور </a></li>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <li><a href="/Home/GetReferalCode"><span class="glyphicon glyphicon-asterisk"></span> باشگاه مشتریان</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="/Account/Register"><span class="glyphicon glyphicon-asterisk"></span> باشگاه مشتریان</a></li>
+                                            }
+                                            <li><a href="/Home/MapRequest"><span class="glyphicon glyphicon-asterisk"></span> درخواست نقشه کشی </a></li>
+                                            <li><a href="/Home/Transport"><span class="glyphicon glyphicon-asterisk"></span> نحوه ارسال کالا </a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="active"><a href="/ImageGallery/ShowGallery">تصاویر</a></li>
+                                    <li class="active"><a href="/Project/ShowProjects">پروژه ها</a></li>
+                                    <li class="active"><a href="/Home/certificate">گواهینامه ها</a></li>
+                                </ul>
+                            </div><!-- /.navbar-collapse -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="hero" id="highlighted" >
+                <div class="inner">
+                    <!--Slideshow-->
+                    <div class="container">
+
+                        <div class="col-md-7">
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active">
+                                        <img src="/img/slides/slide3.png" alt="">
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="/img/slides/slide1.png" alt="">
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="/img/slides/slide2.png" alt="">
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="/img/slides/slide4.png" alt="">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-1"></div>
+
+                        @*<div class="col-md-4">
+                            <div id="myCarousel1" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel1" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel1" data-slide-to="2"></li>
+                                    <li data-target="#myCarousel1" data-slide-to="3"></li>
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+
+                                <div class="carousel-inner " role="listbox">
+
+                                    <div class="item active">
+                                        <a href="/Home/Transport"><img src="/img/slides/1.gif " alt=""></a>
+                                    </div>
+                                    <div class="item ">
+                                        <a href="/Home/ShowAllProducts"><img src="/img/slides/5.gif " alt=""></a>
+                                    </div>
+                                    <div class="item ">
+                                        <a href="/Home/MapRequest"><img src="/img/slides/6.gif " alt=""></a>
+                                    </div>
+
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="item">
+                                            <a href="/Home/GetReferalCode"><img src="/img/slides/2.gif" alt=""></a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="item">
+                                            <a href="/Account/Login"><img src="/img/slides/2.gif" alt=""></a>
+                                        </div>
+                                    }
+                                </div>
+
+
+                            </div>
+                        </div>*@
+
+                        <div class="col-md-5">
+                            <div>
+
+
+                                <div>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <div>
+                                            <a href="/Home/GetReferalCode"><img src="img/slides/S2.gif"></a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            <a href="/Account/Login"><img src="/img/slides/S2.gif" alt=""></a>
+                                        </div>
+                                    }
+                                    <div>
+                                        <a href="/Home/ShowAllProducts"><img src="/img/slides/S1.gif" width="381"></a>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======== Region: #content ======== -->
+        <div id="content">
+            <!-- Mission Statement -->
+            <div class="mission block block-pd-sm block-bg-noise">
+                <div class="container">
+                    <h3 class="block-title" dir="rtl">
+                        اهداف ما
+                    </h3>
+                    <h4 class="text-shadow-white" dir="rtl">
+                        <ul style="        line-height: 25px;">
+                            <li>بهینه سازی مصرف انرژی</li>
+                            <li>ارائه محصولات با کیفیت به مشتریان </li>
+                            <li> بهره گیری از تکنولوژی روز </li>
+                            <li> حفاظت از محیط زیست با ساختمانهای سبز</li>
+                            <li class="list-unstyled">
+                                <h4 class="text-shadow-white text-center">
+                                    <a href="/Home/About" class="btn btn-more i-right"><i class="fa fa-plus"></i>درباره ما</a>
+                                </h4>
+                            </li>
+                        </ul>
+                    </h4>
+                </div>
+            </div>
+            <!--Showcase-->
+            <div class="services block block-bg-gradient block-border-bottom">
+                <div class="container">
+                    <h3 class="block-title" dir="rtl">پیشنهاد شگفت انگیز</h3>
+                    @*<p dir="rtl">
+                    شرکت بهین فلکس به صورت تخصصی در واردات عایق
+                    های الاستومریک با دو برند ISOPIPE و MAKROFLEX و سیستم های ساپورت فلنج ، انواع
+                    پروفیل ها و متعلقات آن سهم بسزایی را در بهینه سازی مصرف انرژی در کشور و سلامت محیط دارد.
+                </p>*@
+                    <br />
+                    <div class="owl-carousel owl-theme item-carousel" data-toggle="owlcarousel" data-owlcarousel-settings='{"items":4,  "navigation":true, "itemsScaleUp":true}'>
+                        @Html.Action("ShowSpecialProducts", "Home")
+                    </div>
+                </div>
+            </div>
+            <!-- News -->
+            <div class="block-contained" dir="rtl">
+                <h2 class="block-title">
+                    خبرها
+                </h2>
+                <div class="row">
+
+                    @Html.Action("ShowLastNews", "Home")
+
+                </div>
+            </div>
+            <div class="mission block block-pd-sm block-bg-noise">
+
+                <div class="container">
+
+                    <div class="col-md-4">
+                        <div>
+
+
+                            <div>
+                                <div>
+                                    <a href="/Home/Transport"><img src="img/slides/1.gif"></a><br /><br />
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+
+
+                            <div>
+                                <div>
+                                    <a href="/Home/MapRequest"><img src="img/slides/6.gif"></a>
+                                </div><br /><br />
+                            </div>
+
+
+                        </div>
+                    </div><div class="col-md-4">
+                        <div>
+
+
+                            <div>
+                                <div>
+                                    <a href="/Home/Transport"><img src="img/slides/3.gif"></a>
+                                </div><br /><br />
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+    Background image callout with CSS overlay
+    Usage: data-block-bg-img="IMAGE-URL" to apply a background image clearly via jQuery .block-bg-overlay = overlays the background image, colour is inherited from block-bg-* classes .block-bg-overlay-NUMBER = determines opcacity value of overlay from 1-9 (default is 5) ie. .block-bg-overlay-2 or .block-bg-overlay-6
+    -->
+            <div class="block block-pd-sm block-bg-grey-dark block-bg-overlay block-bg-overlay-6 text-center" data-block-bg-img="/img/backgrounds/1.jpg?q=40&amp;w=1650&amp;sharp=30" data-stellar-background-ratio="0.3">
+                <h2 class="h-xlg h1 m-a-0">
+                    <span data-counter-up>2,394</span>
+                </h2>
+                <h3 class="h-lg m-t-0 m-b-lg">
+                    نفر مشتریان رضایتمند ما
+                </h3>
+                <p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="#" class="btn btn-more btn-lg"><i class="fa fa-angle-left"></i>به ما بپیوندید </a>
+                    }
+                    else
+                    {
+                        <a href="/Account/Register" class="btn btn-more btn-lg"><i class="fa fa-angle-left"></i>به ما بپیوندید </a>
+                    }
+                </p>
+            </div>
+
+            <div class="testimonials block-contained">
+                <div class="row">
+
+                    @Html.Action("ShowComment", "Home")
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="block block-pd-sm block-bg-primary">
+            <div class="container" dir="rtl">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h4>
+                            <a href="/Home/Certificate">
+                                <font color="#ffcf5e"> گواهینامه ها ...</font>
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row" align="center">
+                            <div class="col-xs-4 col-md-2">
+                                <img src="/img/certificate/3i.png" alt="3i" class="img-responsive">
+                            </div>
+                            <div class="col-xs-4 col-md-2">
+                                <img src="/img/certificate/zus.png" alt="ZUS" class="img-responsive">
+                            </div>
+                            <div class="col-xs-4 col-md-2">
+                                <img src="/img/certificate/BVC.png" alt="BUREAU Veritas Certification" class="img-responsive">
+                            </div>
+                            <div class="col-xs-4 col-md-2">
+                                <img src="/img/certificate/Euro.png" alt="Euro Certificate" class="img-responsive">
+                            </div>
+                            <div class="col-xs-4 col-md-2">
+                                <img src="/img/certificate/HQA.png" alt="High Quality Award" class="img-responsive">
+                            </div>
+                            <div class="col-xs-4 col-md-2">
+                                <img src="/img/certificate/OBI.png" alt="OBI" class="img-responsive">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ======== Region: #footer ======== -->
+<footer id="footer" class="block block-bg-grey-dark" data-block-bg-img="/img/bg_footer-map.png" data-stellar-background-ratio="0.4">
+    <div class="container">
+
+        <div class="row" id="contact">
+            <div class="col-md-7 col-sm-12" dir="rtl">
+                <address>
+                    <strong>شرکت بهین فلکس</strong>
+                    <br><font color="#ffffff">
+                        <i class="fa fa-map-pin fa-fw text-primary"></i> تهران، خیابان بخارست (احمد قصیر)، کوچه دهم ، پلاک 25، طبقه دوم، واحد 4
+                        <br><br>
+                        <i class="fa fa-phone fa-fw text-primary"></i> 88944188-9
+                        <br><i class="fa fa-fax fa-fw text-primary"></i> 88892545
+                        <br>
+                        <i class="fa fa-envelope-o fa-fw text-primary"></i> info@behinflex.com
+                        <br>
+                    </font>
+                </address>
+
+                <div id="map" style="        width: 400px;
+        height: 230px;
+        background: #013636"></div>
+
+
+            </div>
+
+            @using (Html.BeginForm("About", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @model BehinFlex.Models.ContactUsViewModel
+        <div class="col-md-5 hidden-sm hidden-xs" dir="rtl">
+                    <h4>
+                        تماس با ما
+                    </h4>
+                    <div class="form">
+
+                        @if (ViewBag.Message == null)
+                        {
+
+                            <form action="" method="post" role="form" class="contactForm">
+                                @Html.ValidationSummary(true, "", new { @class = "text-muted" })
+                                <div class="form-group">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="نام و نام خانوادگی" data-rule="minlen:4" />
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-muted" })
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="آدرس ایمیل" data-rule="email" />
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-muted" })
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="subject" id="subject" placeholder="موضوع" data-rule="minlen:4" />
+                                    @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-muted" })
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="message" rows="5" data-rule="required" placeholder="پیام"></textarea>
+                                    @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-muted" })
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit">ارسال پیام</button>
+                                </div>
+
+                            </form>
+
+                        }
+                    </div>
+
+                    <div>
+                        <div>
+                            @if (ViewBag.Message != null)
+                            {
+                                <div id="sendmessage">@ViewBag.Message</div>
+
+
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+
+
+        </div>
+        <div class="row subfooter">
+            <!--todo: replace with company copyright details-->
+
+            <div class="col-md-5">
+                <ul class="list-inline pull-right">
+                    <li><a href="/Project/ShowProjects">پروژه ها</a></li>
+                    <li><a href="/ImageGallery/ShowGallery">گالری</a></li>
+                    <li><a href="/Home/ShowAllProducts">محصولات</a></li>
+                </ul>
+            </div>
+            <div class="col-md-7">
+                <font color="#068e96">
+                    <p>.تمامی حقوق برای بهین فراز پایدار (بهین فلکس) محفوظ می باشد</p>
+                </font>
+                <div class="credits">
+                </div>
+            </div>
+        </div>
+
+        <a href="#top" class="scrolltop">Top</a>
+
+    </div>
+</footer>
+
+        <!-- Required JavaScript Libraries -->
+        <script src="/lib/jquery/jquery.min.js"></script>
+        <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+        @*<script src="~/scripts/jquery-1.10.2.min.js"></script>*@
+        <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="/lib/stellar/stellar.min.js"></script>
+        <script src="/lib/waypoints/waypoints.min.js"></script>
+        <script src="/lib/counterup/counterup.min.js"></script>
+        @*<script src="/contactform/contactform.js"></script>*@
+
+        <!-- Template Specisifc Custom Javascript File -->
+        <script src="/js/custom.js"></script>
+
+<script type="text/javascript">
+    
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 0,
+        //nav: true,
+        center: true,
+        autoplay: true,
+
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 4
+            }
+        }
+    });
+
+    $('.autoplay').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000
+    });
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "/Api/Shop",
+            type: "Get",
+            data: {}
+        }).done(function (result) {
+            $('#CountShopCart').html(result);
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

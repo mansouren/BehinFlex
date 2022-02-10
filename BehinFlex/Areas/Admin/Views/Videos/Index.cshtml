@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BehinFlex.Models.Videos>
+
+
+@{
+    ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+
+              columns.Bound(item => @item.VideoUrl).Title("ویدئو").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                <video alt="Videos" class="thumbnail" width="260" height="180" controls>
+                                    <source src="~/Videos/galleryvideos/@item.VideoUrl" type="video/mp4">
+                                    <source src="~/Videos/galleryvideos/@item.VideoUrl" type="video/ogg">
+                                </video>
+                </text>);
+              columns.Bound(model => model.VideoTitle);
+              columns.Bound(model => model.CreateDate);
+              columns.Bound(item => @item.VideoID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                @Html.ActionLink("ویرایش", "Edit", new { id = @item.VideoID }, new { @class = "k-button k-button-icontext k-grid-Edit" })
+                                @Html.ActionLink("حذف", "Delete", new { id = @item.VideoID }, new { @class = "k-button k-button-icontext k-grid-Delete" })
+                             </text>).Width(200);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Custom().Action("Create", "Videos").Text("افزودن");
+          }
+          )
+          .Groupable()
+          .Pageable()
+          .Sortable()
+          .Scrollable(scrollable => scrollable.Height("auto"))
+          .Filterable()
+          .DataSource(dataSource => dataSource
+              .Server()
+              .PageSize(3)
+              .Model(model => model.Id(item => item.VideoID))
+          )
+          )
+
+</div> 

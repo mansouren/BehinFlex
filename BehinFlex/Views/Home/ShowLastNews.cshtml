@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BehinFlex.Models.News>
+
+    
+
+@foreach(var item in Model)
+{
+<div class="media">
+    <div class="media-right hidden-xs">
+        <!-- Date desktop -->
+        <div class="date-wrapper"> <span class="date-m">@item.CreateDate.ToString("MMMM")</span> <span class="date-d">@item.CreateDate.ToString("dd")</span> </div>
+    </div>
+    <div class="media-body container">
+        <h4 class="media-heading">
+            <a href="/Newss/ShowNewsDetail/@item.NewsID" class="text-weight-strong" >@item.NewsTitle </a>
+        </h4>
+        <!-- Meta details mobile -->
+        <ul class="list-inline meta text-muted visible-xs">
+            <li><i class="fa fa-calendar"></i> &nads;<span class="visible-md"></span>@item.CreateDate.ToString("D")</li>
+        </ul>
+        <p>
+            @if (item.NewsDescription.Length >= 250)
+            {
+                @Html.Raw(item.NewsDescription.Substring(0, 250)+"...")
+            }
+            else
+            {
+               @Html.Raw(item.NewsDescription)
+            }
+                
+            <div dir="ltr">
+                <a href="/Newss/ShowNewsDetail/@item.NewsID"><i class="fa fa-angle-double-left"></i> بیشتر بدانید</a><br />
+                @if (item.IsSeminar)
+                {
+                    <a href="/Newss/ParticipantForm/@item.NewsID"><i class="fa fa-angle-double-left"></i>شرکت در سمینار</a>
+                }
+            </div>
+        </p>
+    </div>
+</div>
+}

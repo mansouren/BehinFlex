@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BehinFlex.Models.DiscountCodes>
+
+@{
+    ViewBag.Title = "فهرست کدهای تخفیف";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+    <hr />
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.DiscountCodeTitle).Width(130);
+              columns.Bound(model => model.DiscountCode).Width(150);
+              columns.Bound(model => model.Users.UserName).Width(130);
+              columns.Bound(model => model.DiscountCodeExpireDate).Width(150);
+              columns.Bound(model => model.DiscountPercent).Width(130);
+              columns.Bound(model => model.DiscountCodeUsageCount).Width(130);
+              columns.Bound(model => model.DiscountMaxAmount).Width(130);
+              columns.Bound(item => @item.DiscountCodeID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                @Html.ActionLink("ویرایش", "Edit", new {id = @item.DiscountCodeID }, new {@class = "k-button k-button-icontext k-grid-Edit"})
+                                @Html.ActionLink("حذف", "Delete", new {id = @item.DiscountCodeID }, new {@class = "k-button k-button-icontext k-grid-Delete"})
+                             </text>).Width(160);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Custom().Action("Create", "DiscountCodes").Text("افزودن");
+          }
+          )
+          .HtmlAttributes(new { style = "height: 650px" })
+        .Groupable()
+          .Pageable()
+          .Sortable()
+          .Scrollable(scrollable => scrollable.Height("auto"))
+          .Filterable()
+        .DataSource(dataSource => dataSource
+              .Server()
+              .PageSize(10)
+              .Model(model => model.Id(item => item.DiscountCodeID))
+          )
+          )
+
+</div> 

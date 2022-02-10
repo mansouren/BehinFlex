@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BehinFlex.Models.Projects>
+
+@{
+    ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+
+              columns.Bound(item => @item.ProjectImageUrl).Title("تصویر").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                <img class="thumbnail" src="~/ProjectImages/Thumb/@item.ProjectImageUrl" />
+                             </text>);
+              columns.Bound(model => model.ProjectTitle);
+              columns.Bound(model => model.CreateDate);
+              
+              columns.Bound(item => @item.ProjectID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                                @Html.ActionLink("ویرایش", "Edit", new { id = @item.ProjectID }, new { @class = "k-button k-button-icontext k-grid-Edit" })
+                                @Html.ActionLink("حذف", "Delete", new { id = @item.ProjectID }, new { @class = "k-button k-button-icontext k-grid-Delete" })
+                             </text>).Width(200);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Custom().Action("Create", "Projects").Text("افزودن");
+          }
+          )
+          .Groupable()
+          .Pageable()
+          .Sortable()
+          .Scrollable(scrollable => scrollable.Height("auto"))
+          .Filterable()
+          .DataSource(dataSource => dataSource
+              .Server()
+              .PageSize(4)
+              .Model(model => model.Id(item => item.ProjectID))
+          )
+          )
+   
+</div> 
+@section Script {
+        
+}

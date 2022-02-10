@@ -1,0 +1,60 @@
+﻿@model BehinFlex.Models.SmsInput
+
+@{
+    ViewBag.Title = "SendSmss";
+}
+<div class="row">
+    <h2> ارسال پیامک</h2><div class="alert alert-info col-md-2 text-center text-weight-strong ">اعتبار باقی مانده: @ViewBag.Credit ریال </div>
+</div>
+
+@using (Ajax.BeginForm(actionName: "SendSmss", controllerName: "Users", ajaxOptions: new AjaxOptions { HttpMethod = "POST" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Receivers, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Receivers, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Receivers, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.SmsType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SmsType", null, new { @class = "", id = "" })
+                @Html.ValidationMessageFor(model => model.SmsType, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+        <br/>
+        <div class="alert alert-warning col-md-8 " style="right: 100px;">در صورت ارسال پیامک به چند گیرنده،لطفا شماره تماسها را با کاما از هم جدا کنید</div>
+        <div class="alert alert-info col-md-8 " style="right: 100px;">اگر پیام از نوع خبری باشد به صورت خودکار در گوشی گیرنده ذخیره نمی شود</div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ارسال پیامک" class="btn btn-info" />
+                @Html.ActionLink("بازگشت به فهرست", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>

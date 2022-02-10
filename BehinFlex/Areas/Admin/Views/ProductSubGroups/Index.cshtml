@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BehinFlex.Models.ProductSubGroup>
+
+@{
+    ViewBag.Title = "فهرست " + Server.HtmlDecode(Html.DisplyModelPluralName(model => model).ToString());
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="k-rtl">
+    @(Html.Kendo().Grid(Model)
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(model => model.ProductGroup.ProductBrand.ProductBrandTitle);
+              columns.Bound(model => model.ProductGroup.ProductGroupTitle);
+              columns.Bound(model => model.ProductSubGroupTitle);
+              columns.Bound(item => @item.ProductSubGroupID).Title("دستورات").Filterable(false).Groupable(false)
+                  .Template(@<text>
+                @Html.ActionLink("ویرایش", "Edit", new { id = @item.ProductSubGroupID }, new { @class = "k-button k-button-icontext k-grid-Edit" })
+                @Html.ActionLink("حذف", "Delete", new { id = @item.ProductSubGroupID }, new { @class = "k-button k-button-icontext k-grid-Delete" })
+                </text>).Width(200);
+          })
+          .ToolBar(toolbar =>
+          {
+              toolbar.Custom().Action("Create", "ProductSubGroups").Text("افزودن");
+          }
+          )
+          .Groupable()
+          .Pageable()
+          .Sortable()
+          .Scrollable(scrollable => scrollable.Height("auto"))
+          .Filterable()
+          .DataSource(dataSource => dataSource
+              .Server()
+              .PageSize(10)
+              .Model(model => model.Id(item => item.ProductSubGroupID))
+          )
+    )
+</div>
+@section Script
+{
+}

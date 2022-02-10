@@ -1,0 +1,119 @@
+﻿.mrbs .dropdown-menu > li > a {
+    padding: 6px 10px;
+}
+
+.mrbs .navbar-nav > li > .dropdown-menu {
+    margin-top: 1px;
+    border-right-color:#e3e3f3;
+}
+
+.mrbs .form-control {
+    border: 1px solid #efefef;
+    margin-top: 10px;
+}
+
+.mrbs a:hover {
+    text-decoration: none;
+}
+
+.mrbs .dropdown-menu {
+    background-color: #efefef;
+    box-shadow: none;
+    padding: 0;
+    top: auto;
+    min-width: 180px !important;
+}
+
+.mrbs .dropdown-submenu {
+    position: relative;
+}
+
+    .mrbs .dropdown-submenu .caret {
+        transform: rotate(90deg) !important;
+        vertical-align: middle !important;
+        float: left !important;
+        margin-top: -10px !important;
+    }
+
+    .mrbs .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        right: 100%;
+        margin-top: 0px;
+        margin-right: 0px;
+    }
+
+    .mrbs .dropdown-submenu:hover > .dropdown-menu {
+        display: block !important;
+        position: absolute;
+        z-index: 1010;
+    }
+
+    .mrbs .dropdown-submenu > a:after {
+        border-color: transparent transparent transparent #cccccc;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        float: right;
+        height: 0;
+        width: 0;
+    }
+
+    .mrbs .dropdown-submenu:hover > a:after {
+        border-left-color: #ffffff;
+    }
+
+.mrbs .nav, .mrbs .collapse, .mrbs .dropup, .mrbs .dropdown {
+    position: static;
+}
+
+.mrbs .container {
+    position: relative;
+}
+
+.mrbs .dropdown-menu {
+    left: auto;
+
+}
+
+.mrbs .nav.navbar-right .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+.mrbs .mrbs-content {
+    padding: 15px 25px;
+}
+
+.mrbs .dropdown.mrbs-fw .dropdown-menu {
+    left: 0;
+    right: 0;
+}
+
+.mrbs .title {
+    border-bottom: 1px solid #efefef;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 15px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.mrbs ul {
+    list-style: none outside none;
+    padding-left: 0;
+}
+
+@media (max-width: 767px) {
+    .mrbs .dropdown-submenu .caret {
+        /*transform: rotate(90deg) !important;*/
+        vertical-align: middle !important;
+        float: none !important;
+        margin-top: 7px !important;
+    }
+
+    .mrbs .dropdown-submenu .dropdown-menu, .mrbs .dropdown-submenu:hover .dropdown-menu {
+        padding: 5px 25px;
+        display: block;
+        position: static;
+    }
+}
+

@@ -1,0 +1,206 @@
+﻿
+@model BehinFlex.Models.ProductViewModel
+
+@{
+    ViewBag.Title = "نمایش محصول";
+}
+<div class="row" style="height: 100%">
+    <div id="snackbar" style="display: none;min-width: 250px;margin-left: -125px;background-color: gray;color: #fff;
+     text-align: center; border-radius: 10px;padding: 16px;position: fixed;z-index: 1; left: 50%; bottom: 400px;font-size: 15px;">
+        پیش فاکتور به روزرسانی شد
+    </div>
+
+    <!--main content-->
+    <!-- sidebar -->
+    <div class="col-md-3 sidebar visible-md-block visible-lg-block" dir="rtl">
+        <ul class="nav nav-stackedt ">
+            <li class="active">
+                <a href="#" class="first">
+                    محصول
+                </a>
+            </li>
+            @foreach (var item in Model.IEProduct)
+            {
+                <li>
+                    <a href="/Product/ShowProduct/@item.ProductID">
+
+                        @item.ProductTitle
+                    </a>
+                </li>
+
+                @*<li>
+                        <div class="alert alert-info text-center text-weight-strong">
+                            @item.ProductPrice.ToString("0,#") ریال
+                        </div>
+                    </li>
+
+                    if (Model.Product.Discounts.Any())
+                    {
+                        <li>
+                            <div class="alert alert-success text-center text-weight-strong">
+                                @(Model.Product.Discounts.FirstOrDefault(p => p.Products.ProductID == p.ProductID)?.DiscountPercent) % تخفیف
+                            </div>
+                        </li>
+                    }
+                    <li></li>*@
+
+            }
+        </ul>
+    </div>
+    <div class="col-md-9 " dir="rtl">
+        <br />
+        <br />
+        <div class="thumbnail ">
+            <div style="overflow: hidden" dir="rtl">
+                <h5 class="well well-sm pull-right" style="width: 100%; color: #01747b; padding: 14px;">
+                    <b>
+                        @Model.Product.ProductSubGroup.ProductGroup.ProductBrand.ProductBrandTitle --->
+                        @Model.Product.ProductSubGroup.ProductGroup.ProductGroupTitle --->
+                        @Model.Product.ProductSubGroup.ProductSubGroupTitle --->
+                        @Model.Product.ProductTitle
+                    </b>
+                </h5>
+            </div>
+
+            <div class="col-md-12 row">
+                
+               
+                <div class="row  text-center text-weight-strong " style="color:red">
+                    @if (Model.Product.Discounts.Any())
+                    {
+                        <br />
+                        <div class="col-md-9">
+                            <div class="col-md-3">
+                                قیمت:<strike> @Model.Product.ProductPrice.ToString("#,0 ریال")</strike>
+                            </div>
+
+
+                            <div class="col-md-5">
+                                <span>قیمت بعد از تخفیف :</span> @((Model.Product.ProductPrice - ((Model.Product.Discounts.FirstOrDefault().DiscountPercent * Model.Product.ProductPrice) / 100)).ToString("#,0 ریال"))
+                            </div>
+                            <div class="col-md-3">
+                                <span>تخفیف:</span> @Model.Product.Discounts.FirstOrDefault().DiscountPercent.ToString("D")<span>%</span>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <br />
+                        <div class="col-md-3 text-center text-weight-strong ">
+                            قیمت: @Model.Product.ProductPrice.ToString("#,0 ریال")
+                        </div>
+                    }
+                    <img class="thumbnail pull-left col-md-3" src="~/ProductImages/Image/@Model.Product.ProductImageUrl" width="220" />
+                    <br />
+                    <br />
+                    <div class="col-md-2 text-center">
+                        <a class="btn btn-success text-weight-strong " style="color: black" onclick="AddToBasket(@Model.Product.ProductID)" role="button">خرید</a>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right">
+                @Html.Raw(Model.Product.ProductDescription)
+                <br />
+
+                <p>
+
+                </p>
+            </div>
+            <br style="clear: both" />
+            @if (Model.Product.ProductGalleries.Any())
+            {
+                foreach (var item in Model.Product.ProductGalleries.ToList())
+                {
+                    <div class="col-md-3 ">
+                        <a class="vlightbox1" href="~/ProductImages/Image/@item.ImageName" title="@Model.Product.ProductTitle">
+                            <img src="/ProductImages/Thumb/@item.ImageName" />
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+        <br />
+        <div class="thumbnail ">
+            @if (Model.Product.Comments.Any())
+            {
+                foreach (var item in Model.Product.Comments.Where(c => c.IsApproved == true).OrderByDescending(c => c.CommentID).ToList())
+                {
+
+                    <div style="overflow: hidden" dir="rtl">
+                        <h5 class="well well-sm pull-right" style="width: 100%; color: #01747b; padding: 14px;"><b>نظرات کاربران</b></h5>
+                    </div>
+                    <h5 class="pull-right" style="width: 100%; color: #01747b; padding-right: 16px;">@item.Users.UserName</h5>
+                    <br />
+                    <p>
+                        @item.CommentText
+                        <br />
+                        <small class="pull-left">@item.CommentDate.ToString("yyyy/MM/dd")</small>
+                    </p>
+                    <br style="clear: both" />
+                }
+            }
+            <div align="center">
+                <hr style="width: 75%;" />
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="/Product/CommentForm/@Model.Product.ProductID">برای ثبت نظر کلیک کنید</a>
+
+                }
+
+                else
+                {
+                    <a href="/Account/Register">برای ثبت نظر لطفا ثبت نام کنید</a>
+                    <span>یا</span>
+                    <a href="/Account/Login">برای ورود به سایت کلیک کنید</a>
+                }
+
+            </div>
+        </div>
+    </div>
+    <br />
+    @*<div class="pull-left" style="padding-left: 10px;">
+            <a href="javascript:void(0);" onclick="history.go(-1);">بازگشت به صفحه قبل</a>
+        </div>*@
+</div>
+
+@section Script
+{
+    <!-- Start VisualLightBox.com HEAD section -->
+    <link rel="stylesheet" href="/engine/css/vlightbox1.css" type="text/css" />
+    <link rel="stylesheet" href="/engine/css/visuallightbox.css" type="text/css" media="screen" />
+
+    <script src="/engine/js/visuallightbox.js" type="text/javascript"></script>
+    <!-- End VisualLightBox.com HEAD section -->
+    <script src="/engine/js/vlbdata1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        //$(document).on('click',
+        //    '#backLink',
+        //    function () {
+        //        history.go(-1);
+        //    });
+        function ClearLocalStorage() {
+            localStorage.clear();
+        }
+        function AddToBasket(id) {
+            $(document).ready(function () {
+                $.ajax({
+                    url: "/Api/ShopIndividualProduct",
+                    type: "Get",
+                    data: { productid: id }
+
+                }).done(function (result) {
+                    $('#CountShopCart').html(result);
+                    ClearLocalStorage();
+                });
+
+            });
+            myFunction();
+        }
+
+        function myFunction() {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
+}

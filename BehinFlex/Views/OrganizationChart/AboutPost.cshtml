@@ -1,0 +1,70 @@
+﻿@model IEnumerable<BehinFlex.Models.OrganizationChart>
+
+@{
+    ViewBag.Title = "پستهای سازمان";
+}
+
+    <div class="container" id="about" dir="rtl">
+        <div class="row">
+            <!--main content-->
+            <div class="col-md-3  sidebar visible-md-block visible-lg-block pull-right" dir="rtl">
+                <ul class="nav nav-pills nav-stacked">
+                    <li >
+                        <a href="/Home/About" class="first">
+                            درباره ما
+                            <small>چطور شروع کردیم </small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/ContactUs">
+                            تماس با ما
+                            <small>چگونه با ما تماس بگیرید</small>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/OrganizationChart/AboutPost">
+                            ساختار سازمانی
+                            <small>ساختار شرکت ما</small>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-9" dir="rtl" style="padding-right:22px;">
+                <div class="page-header">
+                    <h2 style="font-family: 'Times New Roman'; color:#01747b;"><b>
+              پستهای سازمانی </b></h2>
+                </div>
+                <div class="row">
+                    
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-6">
+                                <ul class="list-group list-group-flush" style="border-color:#018d96; border-radius:9px; border-style:ridge">
+                                    <li class="list-group-item">
+                                        @item.OrgChartPost : @item.OrgChartFullName
+                                        <div>
+                                            @if (item.OrgChartPhone != null)
+                                            {
+                                                <span>شماره تماس: @item.OrgChartPhone &nbsp;</span>   
+                                                <br/> 
+                                            }
+                                            @if (item.OrgChartEmail != null)
+                                            {
+                                                <span>آدرس ایمیل: @item.OrgChartEmail &nbsp;</span>
+                                                <br/> 
+                                            }
+                                            @if (item.OrgChartTelegramID != null)
+                                            {
+                                                <span>تلگرام: @item.OrgChartTelegramID </span>
+                                            }
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        }
+                            
+                </div> </div>
+        </div>
+    </div>
